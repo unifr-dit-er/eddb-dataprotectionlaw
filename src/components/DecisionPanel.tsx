@@ -46,12 +46,13 @@ const DecisionPanel = ({ decisionId, onClose }: DecisionPanelProps) => {
   return (
     <Sheet open={!!decisionId} onOpenChange={(open) => !open && onClose()}>
       <SheetContent className="w-full sm:max-w-xl overflow-y-auto">
-        <SheetHeader className="flex flex-row items-start justify-between gap-2">
-          <div className="flex gap-2">
-            <Button variant="ghost" size="icon" onClick={handleCopyLink} title="Copier le lien">
-              <Copy className="h-4 w-4" />
-            </Button>
-          </div>
+        <SheetHeader className="flex flex-row items-center justify-between gap-2">
+          <SheetTitle className="text-base leading-snug line-clamp-2 flex-1">
+            {decision?.title ?? (isLoading ? 'Chargement…' : '')}
+          </SheetTitle>
+          <Button variant="ghost" size="icon" onClick={handleCopyLink} title="Copier le lien">
+            <Copy className="h-4 w-4" />
+          </Button>
         </SheetHeader>
 
         {isLoading && (
@@ -64,8 +65,6 @@ const DecisionPanel = ({ decisionId, onClose }: DecisionPanelProps) => {
 
         {decision && (
           <div className="mt-4 space-y-4">
-            <SheetTitle className="text-base leading-snug">{decision.title}</SheetTitle>
-
             <div className="flex items-center gap-3 text-sm text-muted-foreground">
               <span>{getCantonLabel(decision.canton)}</span>
               <span>·</span>

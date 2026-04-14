@@ -1,5 +1,4 @@
 import type { Decision } from '../decision'
-import type { Keyword } from '../keyword'
 import type { Filters } from '../filters'
 import type { NocoDBListResponse } from '../nocodb'
 

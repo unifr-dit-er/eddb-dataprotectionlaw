@@ -15,6 +15,8 @@ const buildQueryString = (filters: Filters): string => {
   if (filters.to) conditions.push(`(date,lte,${filters.to})`)
   if (filters.categories.length > 0)
     conditions.push(`(category,in,${filters.categories.join(',')})`)
+  if (filters.keywords.length > 0)
+    conditions.push(`(keyword_ids,in,${filters.keywords.join(',')})`)
 
   if (conditions.length > 0) params.set('where', conditions.join('~and'))
 

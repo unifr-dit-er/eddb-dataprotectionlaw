@@ -20,7 +20,7 @@ describe('fetchNocoDB', () => {
     expect(mockFetch).toHaveBeenCalledWith(
       'http://localhost:8080/api/v1/db/data/noco/decisions',
       expect.objectContaining({
-        headers: expect.objectContaining({ 'xc-auth': 'test-token' }),
+        headers: expect.objectContaining({ 'xc-token': 'test-token' }),
       })
     )
   })

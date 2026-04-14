@@ -19,7 +19,7 @@ export const fetchNocoDB = async (
 
   const response = await fetch(url.toString(), {
     headers: {
-      'xc-auth': token ?? '',
+      'xc-token': token ?? '',
       'Content-Type': 'application/json',
     },
   })

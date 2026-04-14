@@ -14,12 +14,16 @@ import { Separator } from '@/components/ui/separator'
 import { useFilters } from '@/hooks/useFilters'
 import { useKeywords } from '@/hooks/useKeywords'
 import { CANTONS } from '@/lib/cantons'
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 const FilterSidebar = () => {
   const { filters, setFilter, resetFilters } = useFilters()
   const { data: keywords = [] } = useKeywords()
   const [qInput, setQInput] = useState(filters.q)
+
+  useEffect(() => {
+    setQInput(filters.q)
+  }, [filters.q])
 
   const allCategories = [...new Set(keywords.map((kw) => kw.category))].sort()
 

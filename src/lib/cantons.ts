@@ -1,7 +1,4 @@
-export interface Canton {
-  code: string
-  label: string
-}
+import type { Canton } from '@/types/canton'
 
 export const CANTONS: Canton[] = [
   { code: 'AG', label: 'Argovie' },

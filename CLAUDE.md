@@ -5,7 +5,7 @@ There is no authentication and no database — all data comes from NocoDB.
 
 # Tech Stack
 
-- **Next.js 15** (App Router) + **TypeScript**
+- **Next.js 16** (App Router) + **TypeScript**
 - **Tailwind CSS** for styling
 - **shadcn/ui** for UI components
 - **TanStack Query** for all data fetching and caching

@@ -7,13 +7,16 @@ export const DECISIONS_QUERY_KEY = (filters: Filters) => ['decisions', filters] 
 
 const buildQueryString = (filters: Filters): string => {
   const params = new URLSearchParams()
+  const conditions: string[] = []
 
-  if (filters.q) params.set('where', `(title,like,%${filters.q}%)`)
-  if (filters.canton) params.set('where', `(canton,eq,${filters.canton})`)
-  if (filters.from) params.set('where', `(date,gte,${filters.from})`)
-  if (filters.to) params.set('where', `(date,lte,${filters.to})`)
+  if (filters.q) conditions.push(`(title,like,%${filters.q}%)`)
+  if (filters.canton) conditions.push(`(canton,eq,${filters.canton})`)
+  if (filters.from) conditions.push(`(date,gte,${filters.from})`)
+  if (filters.to) conditions.push(`(date,lte,${filters.to})`)
   if (filters.categories.length > 0)
-    params.set('where', `(category,in,${filters.categories.join(',')})`)
+    conditions.push(`(category,in,${filters.categories.join(',')})`)
+
+  if (conditions.length > 0) params.set('where', conditions.join('~and'))
 
   params.set('limit', '25')
   params.set('offset', String((filters.page - 1) * 25))

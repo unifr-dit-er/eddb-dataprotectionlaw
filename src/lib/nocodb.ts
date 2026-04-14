@@ -10,7 +10,7 @@ export const fetchNocoDB = async (
   const baseUrl = process.env.NEXT_PUBLIC_NOCODB_API_URL
   const token = process.env.NOCODB_API_TOKEN
 
-  const url = new URL(path, baseUrl)
+  const url = new URL(`${baseUrl?.replace(/\/$/, '')}${path}`)
   if (params) {
     Object.entries(params).forEach(([key, value]) => {
       url.searchParams.set(key, value)

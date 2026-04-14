@@ -15,7 +15,7 @@ import { CANTONS } from '@/lib/cantons'
 import { useCallback, useEffect, useState } from 'react'
 
 const SectionLabel = ({ children }: { children: React.ReactNode }) => (
-  <p className="text-[9px] tracking-[0.2em] uppercase font-semibold text-sidebar-foreground/45 mb-2.5">
+  <p className="text-[11px] tracking-[0.2em] uppercase font-semibold text-sidebar-foreground/45 mb-2.5">
     {children}
   </p>
 )
@@ -81,7 +81,7 @@ const FilterSidebar = () => {
           onChange={(e) => setQInput(e.target.value)}
           onKeyDown={handleQKeyDown}
           onBlur={() => setFilter('q', qInput)}
-          className="bg-sidebar-accent border-sidebar-border text-sidebar-foreground placeholder:text-sidebar-foreground/30 focus-visible:border-primary focus-visible:ring-primary/30 h-8 text-sm"
+          className="bg-sidebar-accent border-sidebar-border text-sidebar-foreground placeholder:text-sidebar-foreground/30 focus-visible:border-primary focus-visible:ring-primary/30 h-9 text-base"
         />
       </div>
 
@@ -94,7 +94,7 @@ const FilterSidebar = () => {
           value={filters.canton || '_all'}
           onValueChange={(v) => setFilter('canton', v === '_all' || v === null ? '' : v)}
         >
-          <SelectTrigger className="w-full bg-sidebar-accent border-sidebar-border text-sidebar-foreground h-8 text-sm">
+          <SelectTrigger className="w-full bg-sidebar-accent border-sidebar-border text-sidebar-foreground h-9 text-base">
             <SelectValue placeholder="Tous les cantons" />
           </SelectTrigger>
           <SelectContent>
@@ -124,7 +124,7 @@ const FilterSidebar = () => {
               />
               <label
                 htmlFor={`cat-${category}`}
-                className="text-[12px] text-sidebar-foreground/75 cursor-pointer leading-tight"
+                className="text-sm text-sidebar-foreground/75 cursor-pointer leading-tight"
               >
                 {category}
               </label>
@@ -150,7 +150,7 @@ const FilterSidebar = () => {
                   />
                   <label
                     htmlFor={`kw-${kw.id}`}
-                    className="text-[12px] text-sidebar-foreground/75 cursor-pointer"
+                    className="text-sm text-sidebar-foreground/75 cursor-pointer"
                   >
                     {kw.label}
                   </label>
@@ -168,21 +168,21 @@ const FilterSidebar = () => {
         <SectionLabel>Période</SectionLabel>
         <div className="space-y-2">
           <div>
-            <p className="text-[9px] text-sidebar-foreground/40 mb-1 tracking-widest uppercase">De</p>
+            <p className="text-[11px] text-sidebar-foreground/40 mb-1 tracking-widest uppercase">De</p>
             <Input
               type="date"
               value={filters.from}
               onChange={(e) => setFilter('from', e.target.value)}
-              className="bg-sidebar-accent border-sidebar-border text-sidebar-foreground focus-visible:border-primary focus-visible:ring-primary/30 h-8 text-sm"
+              className="bg-sidebar-accent border-sidebar-border text-sidebar-foreground focus-visible:border-primary focus-visible:ring-primary/30 h-9 text-base"
             />
           </div>
           <div>
-            <p className="text-[9px] text-sidebar-foreground/40 mb-1 tracking-widest uppercase">À</p>
+            <p className="text-[11px] text-sidebar-foreground/40 mb-1 tracking-widest uppercase">À</p>
             <Input
               type="date"
               value={filters.to}
               onChange={(e) => setFilter('to', e.target.value)}
-              className="bg-sidebar-accent border-sidebar-border text-sidebar-foreground focus-visible:border-primary focus-visible:ring-primary/30 h-8 text-sm"
+              className="bg-sidebar-accent border-sidebar-border text-sidebar-foreground focus-visible:border-primary focus-visible:ring-primary/30 h-9 text-base"
             />
           </div>
         </div>
@@ -193,7 +193,7 @@ const FilterSidebar = () => {
           <Divider />
           <button
             onClick={resetFilters}
-            className="w-full text-[11px] text-sidebar-foreground/45 hover:text-sidebar-foreground/80 transition-colors py-1 text-center"
+            className="w-full text-[13px] text-sidebar-foreground/45 hover:text-sidebar-foreground/80 transition-colors py-1 text-center"
           >
             Réinitialiser les filtres
           </button>

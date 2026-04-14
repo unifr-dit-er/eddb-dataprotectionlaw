@@ -27,7 +27,7 @@ const DecisionList = () => {
 
   if (isError) {
     return (
-      <div className="flex items-center justify-center h-64 text-sm text-muted-foreground">
+      <div className="flex items-center justify-center h-64 text-base text-muted-foreground">
         Impossible de charger les décisions.
       </div>
     )
@@ -55,7 +55,7 @@ const DecisionList = () => {
 
   if (decisions.length === 0) {
     return (
-      <div className="flex items-center justify-center h-64 text-sm text-muted-foreground">
+      <div className="flex items-center justify-center h-64 text-base text-muted-foreground">
         Aucune décision ne correspond à vos critères.
       </div>
     )
@@ -64,7 +64,7 @@ const DecisionList = () => {
   return (
     <div className="p-6 space-y-6">
       {pageInfo && (
-        <p className="text-xs text-muted-foreground">
+        <p className="text-sm text-muted-foreground">
           {pageInfo.totalRows} décision{pageInfo.totalRows !== 1 ? 's' : ''}
         </p>
       )}
@@ -82,21 +82,21 @@ const DecisionList = () => {
 
       {pageInfo && pageInfo.totalRows > pageInfo.pageSize && (
         <div className="flex items-center justify-between">
-          <span className="text-[11px] text-muted-foreground">
+          <span className="text-[13px] text-muted-foreground">
             Page {filters.page} / {Math.ceil(pageInfo.totalRows / pageInfo.pageSize)}
           </span>
           <div className="flex gap-5">
             <button
               disabled={pageInfo.isFirstPage}
               onClick={() => setFilter('page', filters.page - 1)}
-              className="text-[11px] text-muted-foreground hover:text-foreground disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+              className="text-[13px] text-muted-foreground hover:text-foreground disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
             >
               ← Précédent
             </button>
             <button
               disabled={pageInfo.isLastPage}
               onClick={() => setFilter('page', filters.page + 1)}
-              className="text-[11px] text-muted-foreground hover:text-foreground disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+              className="text-[13px] text-muted-foreground hover:text-foreground disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
             >
               Suivant →
             </button>

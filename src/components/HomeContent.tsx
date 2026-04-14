@@ -25,10 +25,10 @@ const HomeContent = () => {
     <div className="flex h-screen overflow-hidden">
       <aside className="w-72 shrink-0 bg-sidebar text-sidebar-foreground flex flex-col overflow-hidden border-r border-sidebar-border">
         <div className="px-6 pt-7 pb-6 shrink-0">
-          <p className="text-[9px] tracking-[0.25em] uppercase font-semibold text-sidebar-foreground/40 mb-2">
+          <p className="text-[11px] tracking-[0.25em] uppercase font-semibold text-sidebar-foreground/40 mb-2">
             Jurisprudence · CH
           </p>
-          <h1 className="text-[15px] font-semibold text-sidebar-foreground leading-[1.3]">
+          <h1 className="text-lg font-semibold text-sidebar-foreground leading-[1.3]">
             Protection<br />des données
           </h1>
         </div>

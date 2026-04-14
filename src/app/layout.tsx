@@ -1,17 +1,19 @@
 import type { Metadata } from 'next'
-import { Playfair_Display, DM_Sans } from 'next/font/google'
+import {
+  Atkinson_Hyperlegible_Next,
+  Atkinson_Hyperlegible_Mono,
+} from 'next/font/google'
 import './globals.css'
 import Providers from '@/components/Providers'
 
-const playfair = Playfair_Display({
-  variable: '--font-playfair',
+const atkinson = Atkinson_Hyperlegible_Next({
+  variable: '--font-atkinson',
   subsets: ['latin'],
   display: 'swap',
-  weight: ['400', '700'],
 })
 
-const dmSans = DM_Sans({
-  variable: '--font-dm-sans',
+const atkinsonMono = Atkinson_Hyperlegible_Mono({
+  variable: '--font-atkinson-mono',
   subsets: ['latin'],
   display: 'swap',
 })
@@ -27,8 +29,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="fr">
-      <body className={`${playfair.variable} ${dmSans.variable} antialiased`}>
+    <html lang="fr" className={`${atkinson.variable} ${atkinsonMono.variable}`}>
+      <body className="antialiased">
         <Providers>{children}</Providers>
       </body>
     </html>

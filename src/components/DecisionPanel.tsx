@@ -46,7 +46,7 @@ const DecisionPanel = ({ decisionId, onClose }: DecisionPanelProps) => {
     <Sheet open={!!decisionId} onOpenChange={(open) => !open && onClose()}>
       <SheetContent className="w-full sm:max-w-lg overflow-y-auto">
         <SheetHeader className="flex flex-row items-start justify-between gap-3 mb-6">
-          <SheetTitle className="font-heading text-xl font-bold leading-snug flex-1 text-foreground">
+          <SheetTitle className="font-heading text-2xl font-bold leading-snug flex-1 text-foreground">
             {decision?.title ?? (isLoading ? 'Chargement…' : '')}
           </SheetTitle>
           <button
@@ -70,16 +70,16 @@ const DecisionPanel = ({ decisionId, onClose }: DecisionPanelProps) => {
           <div className="space-y-4">
             <div className="flex items-center gap-2.5">
               {decision.canton && (
-                <span className="text-[9px] font-bold tracking-[0.15em] uppercase bg-muted text-muted-foreground px-1.5 py-0.5 rounded">
+                <span className="text-[11px] font-bold tracking-[0.15em] uppercase bg-muted text-muted-foreground px-1.5 py-0.5 rounded">
                   {getCantonLabel(decision.canton)}
                 </span>
               )}
-              <span className="text-[11px] text-primary font-medium">{formattedDate}</span>
+              <span className="text-[13px] text-primary font-medium">{formattedDate}</span>
             </div>
 
             <Card className="gap-0 py-0">
               <CardContent className="p-4">
-                <p className="text-sm leading-relaxed text-foreground/85">{decision.abstract}</p>
+                <p className="text-base leading-relaxed text-foreground/85">{decision.abstract}</p>
               </CardContent>
             </Card>
 
@@ -88,7 +88,7 @@ const DecisionPanel = ({ decisionId, onClose }: DecisionPanelProps) => {
                 <CardContent className="p-4 space-y-4">
                   {Object.entries(groupedKeywords).map(([category, labels]) => (
                     <div key={category}>
-                      <p className="text-[9px] tracking-[0.2em] uppercase font-semibold text-muted-foreground mb-2">
+                      <p className="text-[11px] tracking-[0.2em] uppercase font-semibold text-muted-foreground mb-2">
                         {category}
                       </p>
                       <div className="flex flex-wrap gap-1.5">
@@ -96,7 +96,7 @@ const DecisionPanel = ({ decisionId, onClose }: DecisionPanelProps) => {
                           <Badge
                             key={label}
                             variant="secondary"
-                            className="text-[10px] px-2 py-0.5 font-normal"
+                            className="text-[12px] px-2 py-0.5 font-normal"
                           >
                             {label}
                           </Badge>
@@ -113,7 +113,7 @@ const DecisionPanel = ({ decisionId, onClose }: DecisionPanelProps) => {
                 href={decision.pdfUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-sm text-primary hover:text-primary/80 transition-colors font-medium"
+                className="flex items-center gap-2 text-base text-primary hover:text-primary/80 transition-colors font-medium"
               >
                 <Download className="h-4 w-4" />
                 Télécharger le document PDF

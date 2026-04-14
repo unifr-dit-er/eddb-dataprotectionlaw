@@ -27,26 +27,26 @@ const DecisionCard = ({ decision, isActive, onClick }: DecisionCardProps) => {
           : 'border-border hover:shadow-md hover:border-primary/25'
       )}
     >
-      <h3 className="text-sm font-medium leading-snug line-clamp-2 mb-2.5 text-foreground">
+      <h3 className="text-base font-medium leading-snug line-clamp-2 mb-2.5 text-foreground">
         {decision.title}
       </h3>
       <div className="flex items-center gap-2 mb-3">
         {decision.canton && (
-          <span className="text-[9px] font-bold tracking-[0.15em] uppercase text-muted-foreground bg-muted px-1.5 py-0.5 rounded">
+          <span className="text-[11px] font-bold tracking-[0.15em] uppercase text-muted-foreground bg-muted px-1.5 py-0.5 rounded">
             {decision.canton}
           </span>
         )}
-        <span className="text-[11px] text-primary font-medium">{formattedDate}</span>
+        <span className="text-[13px] text-primary font-medium">{formattedDate}</span>
       </div>
       {decision.keywords.length > 0 && (
         <div className="flex flex-wrap gap-1">
           {decision.keywords.slice(0, 3).map((kw) => (
-            <Badge key={kw.id} variant="secondary" className="text-[10px] px-1.5 py-0 font-normal">
+            <Badge key={kw.id} variant="secondary" className="text-[12px] px-1.5 py-0 font-normal">
               {kw.label}
             </Badge>
           ))}
           {decision.keywords.length > 3 && (
-            <Badge variant="outline" className="text-[10px] px-1.5 py-0 font-normal text-muted-foreground">
+            <Badge variant="outline" className="text-[12px] px-1.5 py-0 font-normal text-muted-foreground">
               +{decision.keywords.length - 3}
             </Badge>
           )}

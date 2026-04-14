@@ -35,25 +35,19 @@ export const mapDecision = (record: NocoDBRecord): Decision => {
 
 /**
  * Transforme un enregistrement NocoDB brut en Keyword typé.
- * TODO: vérifier les noms de colonnes réels dans la table Keywords de NocoDB
+ * Noms de colonnes NocoDB : KeywordFR (label), catégorie résolue via categoryMap dans useKeywords
  */
 export const mapKeyword = (record: NocoDBRecord): Keyword => {
   // La catégorie peut être un objet lié (Many-to-One NocoDB) ou une chaîne
-  const categoryField = record.Category ?? record.Categories ?? record.Catégorie
+  const categoryField = record.Category ?? record.Categories
   const categoryLabel =
     typeof categoryField === 'object' && categoryField !== null
-      ? String(
-          (categoryField as NocoDBRecord).Title ??
-            (categoryField as NocoDBRecord).Name ??
-            (categoryField as NocoDBRecord).Titre ??
-            ''
-        )
+      ? String((categoryField as NocoDBRecord).CategoryFR ?? '')
       : String(categoryField ?? '')
 
   return {
     id: String(record.Id ?? record.id ?? ''),
-    // TODO: vérifier le nom exact du champ label dans la table Keywords
-    label: String(record.Title ?? record.Label ?? record.Titre ?? record.Name ?? ''),
+    label: String(record.KeywordFR ?? ''),
     category: categoryLabel,
   }
 }

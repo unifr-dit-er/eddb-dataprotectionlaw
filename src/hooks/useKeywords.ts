@@ -19,12 +19,11 @@ const fetchKeywords = async (): Promise<Keyword[]> => {
   const kwData = await kwResp.json()
   const catData = await catResp.json()
 
-  // Construit un dictionnaire id → label pour les catégories
-  // TODO: vérifier le nom du champ label dans la table Categories (Title, Name, Titre…)
+  // Construit un dictionnaire id → label pour les catégories (champ : CategoryFR)
   const categoryMap = new Map<string, string>()
   ;(catData.list ?? []).forEach((cat: NocoDBRecord) => {
     const id = String(cat.Id ?? cat.id ?? '')
-    const label = String(cat.Title ?? cat.Name ?? cat.Titre ?? '')
+    const label = String(cat.CategoryFR ?? '')
     if (id) categoryMap.set(id, label)
   })
 

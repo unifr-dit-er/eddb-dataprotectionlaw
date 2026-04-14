@@ -38,7 +38,8 @@ export const useFilters = () => {
         params.set(paramName, String(value))
       }
 
-      router.push(`${pathname}?${params.toString()}`)
+      const qs = params.toString()
+      router.push(qs ? `${pathname}?${qs}` : pathname)
     },
     [searchParams, router, pathname]
   )

@@ -1,6 +1,5 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
 import DecisionCard from '@/components/DecisionCard'
 import { useDecisions } from '@/hooks/useDecisions'
@@ -28,17 +27,24 @@ const DecisionList = () => {
 
   if (isError) {
     return (
-      <div className="flex-1 flex items-center justify-center text-muted-foreground">
-        Une erreur est survenue lors du chargement des décisions.
+      <div className="flex items-center justify-center h-64 text-sm text-muted-foreground">
+        Impossible de charger les décisions.
       </div>
     )
   }
 
   if (isLoading) {
     return (
-      <div className="flex-1 space-y-3">
-        {Array.from({ length: 8 }).map((_, i) => (
-          <Skeleton key={i} className="h-24 w-full rounded-lg" />
+      <div className="p-6 space-y-3">
+        {Array.from({ length: 6 }).map((_, i) => (
+          <div key={i} className="rounded-xl bg-card border border-border shadow-sm px-5 py-4 space-y-2">
+            <Skeleton className="h-4 w-4/5" />
+            <Skeleton className="h-3 w-1/3" />
+            <div className="flex gap-1.5 pt-0.5">
+              <Skeleton className="h-4 w-14 rounded-full" />
+              <Skeleton className="h-4 w-16 rounded-full" />
+            </div>
+          </div>
         ))}
       </div>
     )
@@ -49,15 +55,21 @@ const DecisionList = () => {
 
   if (decisions.length === 0) {
     return (
-      <div className="flex-1 flex items-center justify-center text-muted-foreground text-sm">
+      <div className="flex items-center justify-center h-64 text-sm text-muted-foreground">
         Aucune décision ne correspond à vos critères.
       </div>
     )
   }
 
   return (
-    <div className="flex-1 flex flex-col gap-4">
-      <div className="space-y-2">
+    <div className="p-6 space-y-6">
+      {pageInfo && (
+        <p className="text-xs text-muted-foreground">
+          {pageInfo.totalRows} décision{pageInfo.totalRows !== 1 ? 's' : ''}
+        </p>
+      )}
+
+      <div className="space-y-3">
         {decisions.map((decision) => (
           <DecisionCard
             key={decision.id}
@@ -68,31 +80,26 @@ const DecisionList = () => {
         ))}
       </div>
 
-      {pageInfo && (
-        <div className="flex items-center justify-between text-sm text-muted-foreground pt-2">
-          <span>
-            {pageInfo.totalRows} décision{pageInfo.totalRows !== 1 ? 's' : ''}
+      {pageInfo && pageInfo.totalRows > pageInfo.pageSize && (
+        <div className="flex items-center justify-between">
+          <span className="text-[11px] text-muted-foreground">
+            Page {filters.page} / {Math.ceil(pageInfo.totalRows / pageInfo.pageSize)}
           </span>
-          <div className="flex items-center gap-2">
-            <Button
-              variant="outline"
-              size="sm"
+          <div className="flex gap-5">
+            <button
               disabled={pageInfo.isFirstPage}
               onClick={() => setFilter('page', filters.page - 1)}
+              className="text-[11px] text-muted-foreground hover:text-foreground disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
             >
-              Précédent
-            </Button>
-            <span>
-              Page {pageInfo.page} / {Math.ceil(pageInfo.totalRows / pageInfo.pageSize)}
-            </span>
-            <Button
-              variant="outline"
-              size="sm"
+              ← Précédent
+            </button>
+            <button
               disabled={pageInfo.isLastPage}
               onClick={() => setFilter('page', filters.page + 1)}
+              className="text-[11px] text-muted-foreground hover:text-foreground disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
             >
-              Suivant
-            </Button>
+              Suivant →
+            </button>
           </div>
         </div>
       )}

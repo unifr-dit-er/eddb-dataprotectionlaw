@@ -1,6 +1,5 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Input } from '@/components/ui/input'
 import {
@@ -10,11 +9,18 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { Separator } from '@/components/ui/separator'
 import { useFilters } from '@/hooks/useFilters'
 import { useKeywords } from '@/hooks/useKeywords'
 import { CANTONS } from '@/lib/cantons'
 import { useCallback, useEffect, useState } from 'react'
+
+const SectionLabel = ({ children }: { children: React.ReactNode }) => (
+  <p className="text-[9px] tracking-[0.2em] uppercase font-semibold text-sidebar-foreground/45 mb-2.5">
+    {children}
+  </p>
+)
+
+const Divider = () => <div className="h-px bg-sidebar-border/50 my-1" />
 
 const FilterSidebar = () => {
   const { filters, setFilter, resetFilters } = useFilters()
@@ -65,29 +71,30 @@ const FilterSidebar = () => {
     filters.to
 
   return (
-    <aside className="w-72 shrink-0 space-y-5 overflow-y-auto pr-4">
-      {/* Recherche texte */}
+    <div className="px-4 py-5 space-y-5">
+      {/* Recherche */}
       <div>
-        <label className="text-xs font-medium text-muted-foreground block mb-1">Recherche</label>
+        <SectionLabel>Recherche</SectionLabel>
         <Input
-          placeholder="Rechercher…"
+          placeholder="Titre, mot-clé…"
           value={qInput}
           onChange={(e) => setQInput(e.target.value)}
           onKeyDown={handleQKeyDown}
           onBlur={() => setFilter('q', qInput)}
+          className="bg-sidebar-accent border-sidebar-border text-sidebar-foreground placeholder:text-sidebar-foreground/30 focus-visible:border-primary focus-visible:ring-primary/30 h-8 text-sm"
         />
       </div>
 
-      <Separator />
+      <Divider />
 
       {/* Canton */}
       <div>
-        <label className="text-xs font-medium text-muted-foreground block mb-1">Canton</label>
+        <SectionLabel>Canton</SectionLabel>
         <Select
           value={filters.canton || '_all'}
           onValueChange={(v) => setFilter('canton', v === '_all' || v === null ? '' : v)}
         >
-          <SelectTrigger>
+          <SelectTrigger className="w-full bg-sidebar-accent border-sidebar-border text-sidebar-foreground h-8 text-sm">
             <SelectValue placeholder="Tous les cantons" />
           </SelectTrigger>
           <SelectContent>
@@ -101,20 +108,24 @@ const FilterSidebar = () => {
         </Select>
       </div>
 
-      <Separator />
+      <Divider />
 
       {/* Catégories */}
       <div>
-        <label className="text-xs font-medium text-muted-foreground block mb-2">Catégories</label>
-        <div className="space-y-2">
+        <SectionLabel>Catégories</SectionLabel>
+        <div className="space-y-2.5">
           {allCategories.map((category) => (
-            <div key={category} className="flex items-center gap-2">
+            <div key={category} className="flex items-center gap-2.5">
               <Checkbox
                 id={`cat-${category}`}
                 checked={filters.categories.includes(category)}
                 onCheckedChange={() => toggleCategory(category)}
+                className="border-sidebar-border/60"
               />
-              <label htmlFor={`cat-${category}`} className="text-sm cursor-pointer leading-tight">
+              <label
+                htmlFor={`cat-${category}`}
+                className="text-[12px] text-sidebar-foreground/75 cursor-pointer leading-tight"
+              >
                 {category}
               </label>
             </div>
@@ -122,23 +133,25 @@ const FilterSidebar = () => {
         </div>
       </div>
 
-      {/* Mots-clés (visible uniquement si catégories sélectionnées) */}
+      {/* Mots-clés */}
       {keywordsInActiveCategories.length > 0 && (
         <>
-          <Separator />
+          <Divider />
           <div>
-            <label className="text-xs font-medium text-muted-foreground block mb-2">
-              Mots-clés
-            </label>
-            <div className="space-y-2">
+            <SectionLabel>Mots-clés</SectionLabel>
+            <div className="space-y-2.5">
               {keywordsInActiveCategories.map((kw) => (
-                <div key={kw.id} className="flex items-center gap-2">
+                <div key={kw.id} className="flex items-center gap-2.5">
                   <Checkbox
                     id={`kw-${kw.id}`}
                     checked={filters.keywords.includes(kw.id)}
                     onCheckedChange={() => toggleKeyword(kw.id)}
+                    className="border-sidebar-border/60"
                   />
-                  <label htmlFor={`kw-${kw.id}`} className="text-sm cursor-pointer">
+                  <label
+                    htmlFor={`kw-${kw.id}`}
+                    className="text-[12px] text-sidebar-foreground/75 cursor-pointer"
+                  >
                     {kw.label}
                   </label>
                 </div>
@@ -148,26 +161,28 @@ const FilterSidebar = () => {
         </>
       )}
 
-      <Separator />
+      <Divider />
 
-      {/* Dates */}
+      {/* Période */}
       <div>
-        <label className="text-xs font-medium text-muted-foreground block mb-2">Période</label>
+        <SectionLabel>Période</SectionLabel>
         <div className="space-y-2">
           <div>
-            <label className="text-xs text-muted-foreground">De</label>
+            <p className="text-[9px] text-sidebar-foreground/40 mb-1 tracking-widest uppercase">De</p>
             <Input
               type="date"
               value={filters.from}
               onChange={(e) => setFilter('from', e.target.value)}
+              className="bg-sidebar-accent border-sidebar-border text-sidebar-foreground focus-visible:border-primary focus-visible:ring-primary/30 h-8 text-sm"
             />
           </div>
           <div>
-            <label className="text-xs text-muted-foreground">À</label>
+            <p className="text-[9px] text-sidebar-foreground/40 mb-1 tracking-widest uppercase">À</p>
             <Input
               type="date"
               value={filters.to}
               onChange={(e) => setFilter('to', e.target.value)}
+              className="bg-sidebar-accent border-sidebar-border text-sidebar-foreground focus-visible:border-primary focus-visible:ring-primary/30 h-8 text-sm"
             />
           </div>
         </div>
@@ -175,13 +190,16 @@ const FilterSidebar = () => {
 
       {hasActiveFilters && (
         <>
-          <Separator />
-          <Button variant="ghost" size="sm" onClick={resetFilters} className="w-full">
+          <Divider />
+          <button
+            onClick={resetFilters}
+            className="w-full text-[11px] text-sidebar-foreground/45 hover:text-sidebar-foreground/80 transition-colors py-1 text-center"
+          >
             Réinitialiser les filtres
-          </Button>
+          </button>
         </>
       )}
-    </aside>
+    </div>
   )
 }
 

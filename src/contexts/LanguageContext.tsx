@@ -38,10 +38,9 @@ export const LanguageProvider = ({ children }: { children: ReactNode }) => {
     setLocaleState(next)
   }, [])
 
-  const translations = getTranslations(locale)
   const t = useCallback(
-    (key: keyof Translations) => translations[key],
-    [translations]
+    (key: keyof Translations) => getTranslations(locale)[key],
+    [locale]
   )
   const langSuffix = getLangSuffix(locale)
 

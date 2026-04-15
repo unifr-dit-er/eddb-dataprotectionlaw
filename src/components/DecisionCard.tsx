@@ -43,7 +43,7 @@ const DecisionCard = ({ decision, isActive, onClick }: DecisionCardProps) => {
       </div>
       {decision.keywords.length > 0 && (
         <div className="flex flex-wrap gap-1">
-          {decision.keywords.map((kw) => (
+          {[...decision.keywords].sort((a, b) => a.label.localeCompare(b.label)).map((kw) => (
             <Badge key={kw.id} variant="secondary" className="text-[12px] px-1.5 py-0 font-normal">
               {kw.label}
             </Badge>

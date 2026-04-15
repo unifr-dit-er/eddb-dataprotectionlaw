@@ -52,6 +52,7 @@ const FilterSidebar = () => {
   }, new Map())
 
   const sortedCategories = [...keywordsByCategory.keys()].sort()
+  keywordsByCategory.forEach((kws) => kws.sort((a, b) => a.label.localeCompare(b.label)))
 
   const toggleKeyword = useCallback(
     (kwId: string) => {

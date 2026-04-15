@@ -18,6 +18,12 @@ const buildQueryString = (filters: Filters, langSuffix: LangSuffix): string => {
   if (filters.canton) conditions.push(`(Canton,eq,${filters.canton})`)
   if (filters.from) conditions.push(`(Date,gte,${filters.from})`)
   if (filters.to) conditions.push(`(Date,lte,${filters.to})`)
+  // TODO: filtres catégories et mots-clés — à activer une fois les noms
+  // des champs liés sur la table Decisions confirmés dans NocoDB
+  // if (filters.categories.length > 0)
+  //   conditions.push(`(NomDuChampCatégorie,in,${filters.categories.join(',')})`)
+  // if (filters.keywords.length > 0)
+  //   conditions.push(`(NomDuChampMotsClés,in,${filters.keywords.join(',')})`)
 
   if (conditions.length > 0) params.set('where', conditions.join('~and'))
   params.set('limit', '25')

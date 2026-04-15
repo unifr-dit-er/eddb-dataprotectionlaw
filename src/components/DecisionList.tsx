@@ -11,7 +11,7 @@ import { useCallback } from 'react'
 
 const DecisionList = () => {
   const { filters, setFilter } = useFilters()
-  const { data, isLoading, isError, nocodbQueries } = useDecisions(filters)
+  const { data, isLoading, isError, nocodbQueries, nocodbError } = useDecisions(filters)
   const { t } = useLanguage()
   const searchParams = useSearchParams()
   const router = useRouter()
@@ -28,14 +28,25 @@ const DecisionList = () => {
     [searchParams, router, pathname]
   )
 
+  const nocodbBaseUrl = process.env.NEXT_PUBLIC_NOCODB_API_URL?.replace(/\/$/, '')
   const devCallout = process.env.NODE_ENV === 'development' ? (
     <div className="mx-6 mt-6 rounded-lg border border-amber-300 bg-amber-50 px-4 py-3 font-mono text-[11px] text-amber-800 space-y-1">
+      {nocodbError && (
+        <div className="text-red-700 font-semibold mb-1">{nocodbError}</div>
+      )}
       {nocodbQueries.map((q, i) => (
         <div key={i} className="break-all">
           {nocodbQueries.length > 1 && (
             <span className="font-semibold mr-2">[{i + 1}/{nocodbQueries.length}]</span>
           )}
-          {q}
+          <a
+            href={nocodbBaseUrl ? `${nocodbBaseUrl}${q}` : q}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline underline-offset-2 hover:text-amber-900"
+          >
+            {q}
+          </a>
         </div>
       ))}
     </div>

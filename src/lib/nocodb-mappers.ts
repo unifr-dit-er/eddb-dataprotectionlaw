@@ -22,9 +22,9 @@ export const mapDecision = (record: NocoDBRecord, langSuffix: LangSuffix): Decis
     abstract: String(record[`Abstract${langSuffix}`] ?? ''),
     canton: String(record.Canton ?? ''),
     date: String(record.Date ?? '').slice(0, 10),
-    keywords: m2mEntries.map((entry) =>
-      mapKeyword(entry.Keywords as NocoDBRecord, langSuffix)
-    ),
+    keywords: m2mEntries
+      .filter((entry) => entry.Keywords != null)
+      .map((entry) => mapKeyword(entry.Keywords as NocoDBRecord, langSuffix)),
     pdfUrl: attachments[0]?.url ?? attachments[0]?.path ?? '',
   }
 }

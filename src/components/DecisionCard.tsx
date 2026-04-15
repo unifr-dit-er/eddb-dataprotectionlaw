@@ -43,16 +43,11 @@ const DecisionCard = ({ decision, isActive, onClick }: DecisionCardProps) => {
       </div>
       {decision.keywords.length > 0 && (
         <div className="flex flex-wrap gap-1">
-          {decision.keywords.slice(0, 3).map((kw) => (
+          {decision.keywords.map((kw) => (
             <Badge key={kw.id} variant="secondary" className="text-[12px] px-1.5 py-0 font-normal">
               {kw.label}
             </Badge>
           ))}
-          {decision.keywords.length > 3 && (
-            <Badge variant="outline" className="text-[12px] px-1.5 py-0 font-normal text-muted-foreground">
-              +{decision.keywords.length - 3}
-            </Badge>
-          )}
         </div>
       )}
     </button>

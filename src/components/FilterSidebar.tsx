@@ -9,6 +9,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import { useLanguage } from '@/contexts/LanguageContext'
 import { useFilters } from '@/hooks/useFilters'
 import { useKeywords } from '@/hooks/useKeywords'
 import { CANTONS } from '@/lib/cantons'
@@ -25,6 +26,7 @@ const Divider = () => <div className="h-px bg-sidebar-border/50 my-1" />
 const FilterSidebar = () => {
   const { filters, setFilter, resetFilters } = useFilters()
   const { data: keywords = [] } = useKeywords()
+  const { t } = useLanguage()
   const [qInput, setQInput] = useState(filters.q)
 
   useEffect(() => {
@@ -72,11 +74,11 @@ const FilterSidebar = () => {
 
   return (
     <div className="px-4 py-5 space-y-5">
-      {/* Recherche */}
+      {/* Search */}
       <div>
-        <SectionLabel>Recherche</SectionLabel>
+        <SectionLabel>{t('sidebar.search.label')}</SectionLabel>
         <Input
-          placeholder="Titre, mot-clé…"
+          placeholder={t('sidebar.search.placeholder')}
           value={qInput}
           onChange={(e) => setQInput(e.target.value)}
           onKeyDown={handleQKeyDown}
@@ -89,16 +91,16 @@ const FilterSidebar = () => {
 
       {/* Canton */}
       <div>
-        <SectionLabel>Canton</SectionLabel>
+        <SectionLabel>{t('sidebar.canton.label')}</SectionLabel>
         <Select
           value={filters.canton || '_all'}
           onValueChange={(v) => setFilter('canton', v === '_all' || v === null ? '' : v)}
         >
           <SelectTrigger className="w-full bg-sidebar-accent border-sidebar-border text-sidebar-foreground h-9 text-base">
-            <SelectValue placeholder="Tous les cantons" />
+            <SelectValue placeholder={t('sidebar.canton.all')} />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="_all">Tous les cantons</SelectItem>
+            <SelectItem value="_all">{t('sidebar.canton.all')}</SelectItem>
             {CANTONS.map((c) => (
               <SelectItem key={c.code} value={c.code}>
                 {c.label}
@@ -110,9 +112,9 @@ const FilterSidebar = () => {
 
       <Divider />
 
-      {/* Catégories */}
+      {/* Categories */}
       <div>
-        <SectionLabel>Catégories</SectionLabel>
+        <SectionLabel>{t('sidebar.categories.label')}</SectionLabel>
         <div className="space-y-2.5">
           {allCategories.map((category) => (
             <div key={category} className="flex items-center gap-2.5">
@@ -133,12 +135,12 @@ const FilterSidebar = () => {
         </div>
       </div>
 
-      {/* Mots-clés */}
+      {/* Keywords */}
       {keywordsInActiveCategories.length > 0 && (
         <>
           <Divider />
           <div>
-            <SectionLabel>Mots-clés</SectionLabel>
+            <SectionLabel>{t('sidebar.keywords.label')}</SectionLabel>
             <div className="space-y-2.5">
               {keywordsInActiveCategories.map((kw) => (
                 <div key={kw.id} className="flex items-center gap-2.5">
@@ -163,12 +165,14 @@ const FilterSidebar = () => {
 
       <Divider />
 
-      {/* Période */}
+      {/* Period */}
       <div>
-        <SectionLabel>Période</SectionLabel>
+        <SectionLabel>{t('sidebar.period.label')}</SectionLabel>
         <div className="space-y-2">
           <div>
-            <p className="text-[11px] text-sidebar-foreground/40 mb-1 tracking-widest uppercase">De</p>
+            <p className="text-[11px] text-sidebar-foreground/40 mb-1 tracking-widest uppercase">
+              {t('sidebar.period.from')}
+            </p>
             <Input
               type="date"
               value={filters.from}
@@ -177,7 +181,9 @@ const FilterSidebar = () => {
             />
           </div>
           <div>
-            <p className="text-[11px] text-sidebar-foreground/40 mb-1 tracking-widest uppercase">À</p>
+            <p className="text-[11px] text-sidebar-foreground/40 mb-1 tracking-widest uppercase">
+              {t('sidebar.period.to')}
+            </p>
             <Input
               type="date"
               value={filters.to}
@@ -195,7 +201,7 @@ const FilterSidebar = () => {
             onClick={resetFilters}
             className="w-full text-[13px] text-sidebar-foreground/45 hover:text-sidebar-foreground/80 transition-colors py-1 text-center"
           >
-            Réinitialiser les filtres
+            {t('sidebar.resetFilters')}
           </button>
         </>
       )}

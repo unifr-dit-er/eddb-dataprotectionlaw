@@ -14,6 +14,7 @@ export interface Translations {
   'sidebar.categories.label': string
   'sidebar.keywords.label': string
   'sidebar.keywords.collapseAll': string
+  'sidebar.fontSize.label': string
   'sidebar.period.label': string
   'sidebar.period.from': string
   'sidebar.period.to': string

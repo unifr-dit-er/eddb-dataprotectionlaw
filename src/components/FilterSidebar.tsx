@@ -15,6 +15,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { useLanguage } from '@/contexts/LanguageContext'
+import { useFontSize } from '@/contexts/FontSizeContext'
 import { useFilters } from '@/hooks/useFilters'
 import { useKeywords } from '@/hooks/useKeywords'
 import { CANTONS } from '@/lib/cantons'
@@ -35,6 +36,7 @@ const FilterSidebar = () => {
   const { filters, setFilter, resetFilters } = useFilters()
   const { data: keywords = [] } = useKeywords()
   const { t } = useLanguage()
+  const { fontSize, setFontSize, fontSizes, fontSizeLabels } = useFontSize()
   const [qInput, setQInput] = useState(filters.q)
   const [openCategories, setOpenCategories] = useState<Set<string>>(new Set())
 
@@ -238,6 +240,30 @@ const FilterSidebar = () => {
               className="bg-sidebar-accent border-sidebar-border text-sidebar-foreground focus-visible:border-primary focus-visible:ring-primary/30 h-9 text-base"
             />
           </div>
+        </div>
+      </div>
+
+      <Divider />
+
+      {/* Font size */}
+      <div>
+        <SectionLabel>{t('sidebar.fontSize.label')}</SectionLabel>
+        <div className="flex gap-1.5">
+          {fontSizes.map((size) => (
+            <button
+              key={size}
+              onClick={() => setFontSize(size)}
+              className={cn(
+                'flex-1 py-1 rounded text-center transition-colors',
+                fontSize === size
+                  ? 'bg-primary text-primary-foreground font-semibold'
+                  : 'bg-sidebar-accent text-sidebar-foreground/60 hover:text-sidebar-foreground/90'
+              )}
+              style={{ fontSize: size === 'xs' ? '11px' : size === 'sm' ? '12px' : size === 'md' ? '13px' : size === 'lg' ? '14px' : '15px' }}
+            >
+              {fontSizeLabels[size]}
+            </button>
+          ))}
         </div>
       </div>
 

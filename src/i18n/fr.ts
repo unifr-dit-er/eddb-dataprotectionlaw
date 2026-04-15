@@ -10,6 +10,7 @@ export const fr: Translations = {
   'sidebar.categories.label': 'Catégories',
   'sidebar.keywords.label': 'Mots-clés',
   'sidebar.keywords.collapseAll': 'Tout fermer',
+  'sidebar.fontSize.label': 'Taille du texte',
   'sidebar.period.label': 'Période',
   'sidebar.period.from': 'De',
   'sidebar.period.to': 'À',

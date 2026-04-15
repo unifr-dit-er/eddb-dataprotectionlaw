@@ -85,6 +85,18 @@ const FilterSidebar = () => {
 
   return (
     <div className="px-4 py-5 space-y-5">
+      {hasActiveFilters && (
+        <>
+          <button
+            onClick={resetFilters}
+            className="w-full text-[13px] text-sidebar-foreground/45 hover:text-sidebar-foreground/80 transition-colors py-1 text-center"
+          >
+            {t('sidebar.resetFilters')}
+          </button>
+          <Divider />
+        </>
+      )}
+
       {/* Search */}
       <div>
         <SectionLabel>{t('sidebar.search.label')}</SectionLabel>
@@ -218,17 +230,6 @@ const FilterSidebar = () => {
         </div>
       </div>
 
-      {hasActiveFilters && (
-        <>
-          <Divider />
-          <button
-            onClick={resetFilters}
-            className="w-full text-[13px] text-sidebar-foreground/45 hover:text-sidebar-foreground/80 transition-colors py-1 text-center"
-          >
-            {t('sidebar.resetFilters')}
-          </button>
-        </>
-      )}
     </div>
   )
 }

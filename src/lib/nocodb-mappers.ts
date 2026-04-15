@@ -10,8 +10,10 @@ export const mapDecision = (record: NocoDBRecord, langSuffix: LangSuffix): Decis
     ? (record.Attachment as NocoDBAttachment[])
     : []
 
-  const linkedKeywords = Array.isArray(record.Keywords)
-    ? (record.Keywords as NocoDBRecord[])
+  // NocoDB exposes the many-to-many join as `_nc_m2m_Decisions_Keywords`.
+  // `record.Keywords` is just a count (e.g. 2), not the linked records.
+  const m2mEntries = Array.isArray(record._nc_m2m_Decisions_Keywords)
+    ? (record._nc_m2m_Decisions_Keywords as NocoDBRecord[])
     : []
 
   return {
@@ -20,7 +22,9 @@ export const mapDecision = (record: NocoDBRecord, langSuffix: LangSuffix): Decis
     abstract: String(record[`Abstract${langSuffix}`] ?? ''),
     canton: String(record.Canton ?? ''),
     date: String(record.Date ?? '').slice(0, 10),
-    keywords: linkedKeywords.map((kw) => mapKeyword(kw, langSuffix)),
+    keywords: m2mEntries.map((entry) =>
+      mapKeyword(entry.Keywords as NocoDBRecord, langSuffix)
+    ),
     pdfUrl: attachments[0]?.url ?? attachments[0]?.path ?? '',
   }
 }

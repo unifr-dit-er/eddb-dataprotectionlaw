@@ -23,7 +23,6 @@ describe('useFilters', () => {
     expect(result.current.filters).toEqual({
       q: '',
       canton: '',
-      categories: [],
       keywords: [],
       from: '',
       to: '',
@@ -56,9 +55,9 @@ describe('useFilters', () => {
     expect(mockPush).toHaveBeenCalledWith('/')
   })
 
-  it('reads categories as array', () => {
-    mockSearchParams = new URLSearchParams('category=Santé&category=Travail')
+  it('reads keywords as array', () => {
+    mockSearchParams = new URLSearchParams('keyword=1&keyword=2')
     const { result } = renderHook(() => useFilters())
-    expect(result.current.filters.categories).toEqual(['Santé', 'Travail'])
+    expect(result.current.filters.keywords).toEqual(['1', '2'])
   })
 })

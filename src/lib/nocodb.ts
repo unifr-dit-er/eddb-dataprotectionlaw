@@ -25,7 +25,8 @@ export const fetchNocoDB = async (
   })
 
   if (!response.ok) {
-    throw new Error(`NocoDB error: ${response.status}`)
+    const body = await response.text().catch(() => '')
+    throw new Error(`NocoDB error: ${response.status} — ${body}`)
   }
 
   return response.json()

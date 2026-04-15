@@ -12,7 +12,6 @@ export const useFilters = () => {
   const filters: Filters = {
     q: searchParams.get('q') ?? '',
     canton: searchParams.get('canton') ?? '',
-    categories: searchParams.getAll('category'),
     keywords: searchParams.getAll('keyword'),
     from: searchParams.get('from') ?? '',
     to: searchParams.get('to') ?? '',
@@ -26,8 +25,7 @@ export const useFilters = () => {
       // Reset page when changing any filter
       params.delete('page')
 
-      const paramName =
-        key === 'categories' ? 'category' : key === 'keywords' ? 'keyword' : key
+      const paramName = key === 'keywords' ? 'keyword' : key
 
       if (Array.isArray(value)) {
         params.delete(paramName)

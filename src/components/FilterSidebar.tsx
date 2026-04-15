@@ -33,23 +33,6 @@ const FilterSidebar = () => {
     setQInput(filters.q)
   }, [filters.q])
 
-  const allCategories = [...new Set(keywords.map((kw) => kw.category))].sort()
-
-  const keywordsInActiveCategories =
-    filters.categories.length > 0
-      ? keywords.filter((kw) => filters.categories.includes(kw.category))
-      : []
-
-  const toggleCategory = useCallback(
-    (category: string) => {
-      const next = filters.categories.includes(category)
-        ? filters.categories.filter((c) => c !== category)
-        : [...filters.categories, category]
-      setFilter('categories', next)
-    },
-    [filters.categories, setFilter]
-  )
-
   const toggleKeyword = useCallback(
     (kwId: string) => {
       const next = filters.keywords.includes(kwId)
@@ -67,7 +50,6 @@ const FilterSidebar = () => {
   const hasActiveFilters =
     filters.q ||
     filters.canton ||
-    filters.categories.length > 0 ||
     filters.keywords.length > 0 ||
     filters.from ||
     filters.to
@@ -112,55 +94,29 @@ const FilterSidebar = () => {
 
       <Divider />
 
-      {/* Categories */}
-      <div>
-        <SectionLabel>{t('sidebar.categories.label')}</SectionLabel>
-        <div className="space-y-2.5">
-          {allCategories.map((category) => (
-            <div key={category} className="flex items-center gap-2.5">
-              <Checkbox
-                id={`cat-${category}`}
-                checked={filters.categories.includes(category)}
-                onCheckedChange={() => toggleCategory(category)}
-                className="border-sidebar-border/60"
-              />
-              <label
-                htmlFor={`cat-${category}`}
-                className="text-sm text-sidebar-foreground/75 cursor-pointer leading-tight"
-              >
-                {category}
-              </label>
-            </div>
-          ))}
-        </div>
-      </div>
-
       {/* Keywords */}
-      {keywordsInActiveCategories.length > 0 && (
-        <>
-          <Divider />
-          <div>
-            <SectionLabel>{t('sidebar.keywords.label')}</SectionLabel>
-            <div className="space-y-2.5">
-              {keywordsInActiveCategories.map((kw) => (
-                <div key={kw.id} className="flex items-center gap-2.5">
-                  <Checkbox
-                    id={`kw-${kw.id}`}
-                    checked={filters.keywords.includes(kw.id)}
-                    onCheckedChange={() => toggleKeyword(kw.id)}
-                    className="border-sidebar-border/60"
-                  />
-                  <label
-                    htmlFor={`kw-${kw.id}`}
-                    className="text-sm text-sidebar-foreground/75 cursor-pointer"
-                  >
-                    {kw.label}
-                  </label>
-                </div>
-              ))}
-            </div>
+      {keywords.length > 0 && (
+        <div>
+          <SectionLabel>{t('sidebar.keywords.label')}</SectionLabel>
+          <div className="space-y-2.5">
+            {keywords.map((kw) => (
+              <div key={kw.id} className="flex items-center gap-2.5">
+                <Checkbox
+                  id={`kw-${kw.id}`}
+                  checked={filters.keywords.includes(kw.id)}
+                  onCheckedChange={() => toggleKeyword(kw.id)}
+                  className="border-sidebar-border/60"
+                />
+                <label
+                  htmlFor={`kw-${kw.id}`}
+                  className="text-sm text-sidebar-foreground/75 cursor-pointer leading-tight"
+                >
+                  {kw.label}
+                </label>
+              </div>
+            ))}
           </div>
-        </>
+        </div>
       )}
 
       <Divider />

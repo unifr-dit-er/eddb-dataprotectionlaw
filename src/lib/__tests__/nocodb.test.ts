@@ -44,7 +44,8 @@ describe('fetchNocoDB', () => {
     mockFetch.mockResolvedValueOnce({
       ok: false,
       status: 401,
-    } as Response)
+      text: async () => 'Unauthorized',
+    } as unknown as Response)
 
     await expect(fetchNocoDB('/api/v1/db/data/noco/decisions')).rejects.toThrow('NocoDB error: 401')
   })

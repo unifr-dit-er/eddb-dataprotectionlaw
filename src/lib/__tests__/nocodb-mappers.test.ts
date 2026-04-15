@@ -10,7 +10,21 @@ const baseRecord = {
   Canton: 'GE',
   Date: '2024-03-15',
   Attachment: [{ url: 'https://example.com/doc.pdf' }],
-  Keywords: [],
+  // NocoDB exposes the m2m join under _nc_m2m_Decisions_Keywords;
+  // `Keywords` is just a count and is ignored.
+  Keywords: 0,
+  _nc_m2m_Decisions_Keywords: [
+    {
+      Keywords_id: 42,
+      Decisions_id: 1,
+      Keywords: {
+        Id: '42',
+        KeywordFR: 'Mot-clé FR',
+        KeywordDE: 'Stichwort DE',
+        Category: { CategoryFR: 'Catégorie FR', CategoryDE: 'Kategorie DE' },
+      },
+    },
+  ],
 }
 
 const baseKeyword = {
@@ -39,6 +53,21 @@ describe('mapDecision', () => {
     expect(result.canton).toBe('GE')
     expect(result.date).toBe('2024-03-15')
     expect(result.pdfUrl).toBe('https://example.com/doc.pdf')
+  })
+
+  it('maps keywords from _nc_m2m_Decisions_Keywords', () => {
+    const resultFR = mapDecision(baseRecord, 'FR')
+    expect(resultFR.keywords).toHaveLength(1)
+    expect(resultFR.keywords[0].id).toBe('42')
+    expect(resultFR.keywords[0].label).toBe('Mot-clé FR')
+
+    const resultDE = mapDecision(baseRecord, 'DE')
+    expect(resultDE.keywords[0].label).toBe('Stichwort DE')
+  })
+
+  it('returns empty keywords when _nc_m2m_Decisions_Keywords is absent', () => {
+    const result = mapDecision({ ...baseRecord, _nc_m2m_Decisions_Keywords: undefined }, 'FR')
+    expect(result.keywords).toHaveLength(0)
   })
 })
 

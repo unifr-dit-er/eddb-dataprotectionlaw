@@ -20,7 +20,6 @@ describe('Types', () => {
     const filters: Filters = {
       q: '',
       canton: '',
-      categories: [],
       keywords: [],
       from: '',
       to: '',

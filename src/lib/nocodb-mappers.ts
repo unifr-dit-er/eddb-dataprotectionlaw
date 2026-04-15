@@ -1,53 +1,40 @@
 import type { Decision } from '@/types/decision'
 import type { Keyword } from '@/types/keyword'
+import type { LangSuffix } from '@/i18n'
 
 type NocoDBRecord = Record<string, unknown>
 type NocoDBAttachment = { url?: string; path?: string }
 
-/**
- * Transforme un enregistrement NocoDB brut en Decision typée.
- * Noms de colonnes NocoDB : DescriptionFR, AbstractFR, Canton, Date, Attachment
- *
- * TODO: remplacer 'Keywords' par le nom exact du champ lié dans NocoDB
- * (le nom du champ "Link to another record" sur la table Decisions)
- */
-export const mapDecision = (record: NocoDBRecord): Decision => {
+export const mapDecision = (record: NocoDBRecord, langSuffix: LangSuffix): Decision => {
   const attachments = Array.isArray(record.Attachment)
     ? (record.Attachment as NocoDBAttachment[])
     : []
 
-  // Nom du champ lié aux mots-clés sur la table Decisions
-  // À adapter selon le nom réel dans NocoDB (ex: 'Keywords', 'Mots-clés', 'Tags'…)
   const linkedKeywords = Array.isArray(record.Keywords)
     ? (record.Keywords as NocoDBRecord[])
     : []
 
   return {
     id: String(record.Id ?? record.id ?? ''),
-    title: String(record.DescriptionFR ?? ''),
-    abstract: String(record.AbstractFR ?? ''),
+    title: String(record[`Description${langSuffix}`] ?? ''),
+    abstract: String(record[`Abstract${langSuffix}`] ?? ''),
     canton: String(record.Canton ?? ''),
-    date: String(record.Date ?? '').slice(0, 10), // garde uniquement YYYY-MM-DD
-    keywords: linkedKeywords.map(mapKeyword),
+    date: String(record.Date ?? '').slice(0, 10),
+    keywords: linkedKeywords.map((kw) => mapKeyword(kw, langSuffix)),
     pdfUrl: attachments[0]?.url ?? attachments[0]?.path ?? '',
   }
 }
 
-/**
- * Transforme un enregistrement NocoDB brut en Keyword typé.
- * Noms de colonnes NocoDB : KeywordFR (label), catégorie résolue via categoryMap dans useKeywords
- */
-export const mapKeyword = (record: NocoDBRecord): Keyword => {
-  // La catégorie peut être un objet lié (Many-to-One NocoDB) ou une chaîne
+export const mapKeyword = (record: NocoDBRecord, langSuffix: LangSuffix): Keyword => {
   const categoryField = record.Category ?? record.Categories
   const categoryLabel =
     typeof categoryField === 'object' && categoryField !== null
-      ? String((categoryField as NocoDBRecord).CategoryFR ?? '')
+      ? String((categoryField as NocoDBRecord)[`Category${langSuffix}`] ?? '')
       : String(categoryField ?? '')
 
   return {
     id: String(record.Id ?? record.id ?? ''),
-    label: String(record.KeywordFR ?? ''),
+    label: String(record[`Keyword${langSuffix}`] ?? ''),
     category: categoryLabel,
   }
 }

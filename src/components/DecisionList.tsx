@@ -4,12 +4,14 @@ import { Skeleton } from '@/components/ui/skeleton'
 import DecisionCard from '@/components/DecisionCard'
 import { useDecisions } from '@/hooks/useDecisions'
 import { useFilters } from '@/hooks/useFilters'
+import { useLanguage } from '@/contexts/LanguageContext'
 import { useSearchParams, useRouter, usePathname } from 'next/navigation'
 import { useCallback } from 'react'
 
 const DecisionList = () => {
   const { filters, setFilter } = useFilters()
   const { data, isLoading, isError } = useDecisions(filters)
+  const { t } = useLanguage()
   const searchParams = useSearchParams()
   const router = useRouter()
   const pathname = usePathname()
@@ -28,7 +30,7 @@ const DecisionList = () => {
   if (isError) {
     return (
       <div className="flex items-center justify-center h-64 text-base text-muted-foreground">
-        Impossible de charger les décisions.
+        {t('decisions.error')}
       </div>
     )
   }
@@ -56,16 +58,21 @@ const DecisionList = () => {
   if (decisions.length === 0) {
     return (
       <div className="flex items-center justify-center h-64 text-base text-muted-foreground">
-        Aucune décision ne correspond à vos critères.
+        {t('decisions.empty')}
       </div>
     )
   }
+
+  const resultUnit =
+    pageInfo?.totalRows === 1
+      ? t('decisions.resultUnit_singular')
+      : t('decisions.resultUnit_plural')
 
   return (
     <div className="p-6 space-y-6">
       {pageInfo && (
         <p className="text-sm text-muted-foreground">
-          {pageInfo.totalRows} décision{pageInfo.totalRows !== 1 ? 's' : ''}
+          {pageInfo.totalRows} {resultUnit}
         </p>
       )}
 
@@ -83,7 +90,7 @@ const DecisionList = () => {
       {pageInfo && pageInfo.totalRows > pageInfo.pageSize && (
         <div className="flex items-center justify-between">
           <span className="text-[13px] text-muted-foreground">
-            Page {filters.page} / {Math.ceil(pageInfo.totalRows / pageInfo.pageSize)}
+            {t('decisions.page')} {filters.page} / {Math.ceil(pageInfo.totalRows / pageInfo.pageSize)}
           </span>
           <div className="flex gap-5">
             <button
@@ -91,14 +98,14 @@ const DecisionList = () => {
               onClick={() => setFilter('page', filters.page - 1)}
               className="text-[13px] text-muted-foreground hover:text-foreground disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
             >
-              ← Précédent
+              {t('decisions.prev')}
             </button>
             <button
               disabled={pageInfo.isLastPage}
               onClick={() => setFilter('page', filters.page + 1)}
               className="text-[13px] text-muted-foreground hover:text-foreground disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
             >
-              Suivant →
+              {t('decisions.next')}
             </button>
           </div>
         </div>

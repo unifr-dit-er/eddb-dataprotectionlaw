@@ -10,6 +10,7 @@ import {
   SheetTitle,
 } from '@/components/ui/sheet'
 import { useDecision } from '@/hooks/useDecision'
+import { useLanguage } from '@/contexts/LanguageContext'
 import { getCantonLabel } from '@/lib/cantons'
 import { Copy, Download } from 'lucide-react'
 
@@ -20,6 +21,7 @@ interface DecisionPanelProps {
 
 const DecisionPanel = ({ decisionId, onClose }: DecisionPanelProps) => {
   const { data: decision, isLoading } = useDecision(decisionId)
+  const { t, locale } = useLanguage()
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(window.location.href)
@@ -35,7 +37,7 @@ const DecisionPanel = ({ decisionId, onClose }: DecisionPanelProps) => {
   )
 
   const formattedDate = decision
-    ? new Date(decision.date).toLocaleDateString('fr-CH', {
+    ? new Date(decision.date).toLocaleDateString(`${locale}-CH`, {
         day: '2-digit',
         month: 'long',
         year: 'numeric',
@@ -47,11 +49,11 @@ const DecisionPanel = ({ decisionId, onClose }: DecisionPanelProps) => {
       <SheetContent className="w-full sm:max-w-lg overflow-y-auto">
         <SheetHeader className="flex flex-row items-start justify-between gap-3 mb-6">
           <SheetTitle className="font-heading text-2xl font-bold leading-snug flex-1 text-foreground">
-            {decision?.title ?? (isLoading ? 'Chargement…' : '')}
+            {decision?.title ?? (isLoading ? t('decision.loading') : '')}
           </SheetTitle>
           <button
             onClick={handleCopyLink}
-            title="Copier le lien"
+            title={t('decision.copyLink')}
             className="text-muted-foreground hover:text-foreground transition-colors mt-0.5 shrink-0"
           >
             <Copy className="h-4 w-4" />
@@ -116,7 +118,7 @@ const DecisionPanel = ({ decisionId, onClose }: DecisionPanelProps) => {
                 className="flex items-center gap-2 text-base text-primary hover:text-primary/80 transition-colors font-medium"
               >
                 <Download className="h-4 w-4" />
-                Télécharger le document PDF
+                {t('decision.downloadPdf')}
               </a>
             )}
           </div>

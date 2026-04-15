@@ -9,6 +9,7 @@ export const fr: Translations = {
   'sidebar.canton.all': 'Tous les cantons',
   'sidebar.categories.label': 'Catégories',
   'sidebar.keywords.label': 'Mots-clés',
+  'sidebar.keywords.collapseAll': 'Tout fermer',
   'sidebar.period.label': 'Période',
   'sidebar.period.from': 'De',
   'sidebar.period.to': 'À',

@@ -139,7 +139,17 @@ const FilterSidebar = () => {
         <>
           <Divider />
           <div>
-            <SectionLabel>{t('sidebar.keywords.label')}</SectionLabel>
+            <div className="flex items-center justify-between mb-2.5">
+              <SectionLabel>{t('sidebar.keywords.label')}</SectionLabel>
+              {openCategories.size > 0 && (
+                <button
+                  onClick={() => setOpenCategories(new Set())}
+                  className="text-[11px] text-sidebar-foreground/40 hover:text-sidebar-foreground/70 transition-colors -mt-2.5"
+                >
+                  {t('sidebar.keywords.collapseAll')}
+                </button>
+              )}
+            </div>
             <div className="space-y-0.5">
               {sortedCategories.map((category) => {
                 const catKeywords = keywordsByCategory.get(category)!

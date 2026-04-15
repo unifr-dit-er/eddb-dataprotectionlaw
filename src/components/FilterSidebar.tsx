@@ -196,9 +196,14 @@ const FilterSidebar = () => {
                             />
                             <label
                               htmlFor={`kw-${category}-${kw.id}`}
-                              className="text-sm text-sidebar-foreground/65 cursor-pointer leading-tight"
+                              className="flex-1 flex items-center justify-between gap-1.5 text-sm text-sidebar-foreground/65 cursor-pointer leading-tight"
                             >
-                              {kw.label}
+                              <span>{kw.label}</span>
+                              {kw.decisionsCount > 0 && (
+                                <span className="text-[10px] text-sidebar-foreground/50 tabular-nums shrink-0">
+                                  {kw.decisionsCount}
+                                </span>
+                              )}
                             </label>
                           </div>
                         ))}

@@ -40,5 +40,6 @@ export const mapKeyword = (record: NocoDBRecord, langSuffix: LangSuffix): Keywor
     id: String(record.Id ?? record.id ?? ''),
     label: String(record[`Keyword${langSuffix}`] ?? ''),
     category: categoryLabel,
+    decisionsCount: typeof record.Decisions === 'number' ? record.Decisions : 0,
   }
 }

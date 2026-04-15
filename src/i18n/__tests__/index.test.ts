@@ -1,4 +1,3 @@
-import { describe, it, expect } from 'vitest'
 import { getTranslations, getLangSuffix } from '../index'
 
 describe('getTranslations', () => {

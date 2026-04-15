@@ -23,7 +23,7 @@ const HomeContent = () => {
 
   return (
     <div className="flex h-screen overflow-hidden">
-      <aside className="w-72 shrink-0 bg-sidebar text-sidebar-foreground flex flex-col overflow-hidden border-r border-sidebar-border">
+      <aside className="w-80 shrink-0 bg-sidebar text-sidebar-foreground flex flex-col overflow-hidden border-r border-sidebar-border">
         <div className="px-6 pt-7 pb-6 shrink-0">
           <p className="text-[11px] tracking-[0.25em] uppercase font-semibold text-sidebar-foreground/40 mb-2">
             Jurisprudence · CH

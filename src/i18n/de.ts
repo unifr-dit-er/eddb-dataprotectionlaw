@@ -1,0 +1,26 @@
+import type { Translations } from './index'
+
+export const de: Translations = {
+  'sidebar.title': 'Datenschutz',
+  'sidebar.subtitle': 'Rechtsprechung · CH',
+  'sidebar.search.label': 'Suche',
+  'sidebar.search.placeholder': 'Titel, Stichwort…',
+  'sidebar.canton.label': 'Kanton',
+  'sidebar.canton.all': 'Alle Kantone',
+  'sidebar.categories.label': 'Kategorien',
+  'sidebar.keywords.label': 'Stichwörter',
+  'sidebar.period.label': 'Zeitraum',
+  'sidebar.period.from': 'Von',
+  'sidebar.period.to': 'Bis',
+  'sidebar.resetFilters': 'Filter zurücksetzen',
+  'decision.loading': 'Wird geladen…',
+  'decision.copyLink': 'Link kopieren',
+  'decision.downloadPdf': 'PDF-Dokument herunterladen',
+  'decisions.error': 'Entscheide konnten nicht geladen werden.',
+  'decisions.empty': 'Keine Entscheide entsprechen Ihren Kriterien.',
+  'decisions.resultUnit_singular': 'Entscheid',
+  'decisions.resultUnit_plural': 'Entscheide',
+  'decisions.page': 'Seite',
+  'decisions.prev': '← Zurück',
+  'decisions.next': 'Weiter →',
+}

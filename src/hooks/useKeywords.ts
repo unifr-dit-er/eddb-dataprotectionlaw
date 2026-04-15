@@ -31,9 +31,17 @@ const fetchKeywords = async (langSuffix: LangSuffix): Promise<Keyword[]> => {
   return (kwData.list ?? []).map((record: NocoDBRecord): Keyword => {
     const kw = mapKeyword(record, langSuffix)
     if (!kw.category) {
-      const catId = String(
-        record.CategoriesId ?? record.CategoryId ?? record.fk_categories ?? ''
-      )
+      // NocoDB linked fields often only include the primary field (e.g. CategoryDE),
+      // so CategoryFR may be absent. Extract the linked record's Id to look up the
+      // correct label from the separately-fetched categoryMap.
+      const categoryField = record.Category ?? record.Categories
+      const linkedId = Array.isArray(categoryField) && categoryField.length > 0
+        ? String((categoryField[0] as NocoDBRecord).Id ?? (categoryField[0] as NocoDBRecord).id ?? '')
+        : typeof categoryField === 'object' && categoryField !== null
+        ? String((categoryField as NocoDBRecord).Id ?? (categoryField as NocoDBRecord).id ?? '')
+        : ''
+      const catId = linkedId
+        || String(record.CategoriesId ?? record.CategoryId ?? record.fk_categories ?? '')
       kw.category = categoryMap.get(catId) ?? ''
     }
     return kw

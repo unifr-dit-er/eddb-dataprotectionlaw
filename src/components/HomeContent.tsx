@@ -39,7 +39,7 @@ const HomeContent = () => {
           </h1>
         </div>
         <div className="h-px bg-sidebar-border/60 mx-4 shrink-0" />
-        <ScrollArea className="flex-1">
+        <ScrollArea className="flex-1 min-h-0">
           <FilterSidebar />
         </ScrollArea>
       </aside>

@@ -2,6 +2,7 @@
 
 import { Badge } from '@/components/ui/badge'
 import type { Decision } from '@/types/decision'
+import { useLanguage } from '@/contexts/LanguageContext'
 import { cn } from '@/lib/utils'
 
 interface DecisionCardProps {
@@ -11,7 +12,9 @@ interface DecisionCardProps {
 }
 
 const DecisionCard = ({ decision, isActive, onClick }: DecisionCardProps) => {
-  const formattedDate = new Date(decision.date).toLocaleDateString('fr-CH', {
+  const { locale } = useLanguage()
+
+  const formattedDate = new Date(decision.date).toLocaleDateString(`${locale}-CH`, {
     day: '2-digit',
     month: '2-digit',
     year: 'numeric',

@@ -34,11 +34,14 @@ interface FontSizeContextValue {
 const FontSizeContext = createContext<FontSizeContextValue | null>(null)
 
 export const FontSizeProvider = ({ children }: { children: ReactNode }) => {
-  const [fontSize, setFontSizeState] = useState<FontSize>(() => {
-    if (typeof window === 'undefined') return DEFAULT_FONT_SIZE
+  const [fontSize, setFontSizeState] = useState<FontSize>(DEFAULT_FONT_SIZE)
+
+  useEffect(() => {
     const stored = localStorage.getItem(STORAGE_KEY)
-    return (FONT_SIZES.includes(stored as FontSize) ? stored : DEFAULT_FONT_SIZE) as FontSize
-  })
+    if (stored && FONT_SIZES.includes(stored as FontSize)) {
+      setFontSizeState(stored as FontSize)
+    }
+  }, [])
 
   useEffect(() => {
     document.documentElement.style.fontSize = FONT_SIZE_VALUES[fontSize]

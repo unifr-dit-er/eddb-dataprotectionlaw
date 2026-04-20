@@ -10,12 +10,14 @@ const atkinson = Atkinson_Hyperlegible_Next({
   variable: '--font-atkinson',
   subsets: ['latin'],
   display: 'swap',
+  adjustFontFallback: false,
 })
 
 const atkinsonMono = Atkinson_Hyperlegible_Mono({
   variable: '--font-atkinson-mono',
   subsets: ['latin'],
   display: 'swap',
+  adjustFontFallback: false,
 })
 
 // Note: metadata and html[lang] are static (server-rendered) and cannot be driven

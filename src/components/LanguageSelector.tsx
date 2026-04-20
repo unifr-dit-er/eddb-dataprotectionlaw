@@ -18,8 +18,8 @@ const LanguageSelector = () => {
           className={cn(
             'text-[11px] tracking-[0.15em] uppercase font-semibold px-1.5 py-0.5 rounded transition-colors',
             locale === l
-              ? 'text-sidebar-foreground bg-sidebar-accent'
-              : 'text-sidebar-foreground/35 hover:text-sidebar-foreground/60'
+              ? 'text-foreground bg-muted'
+              : 'text-muted-foreground hover:text-foreground'
           )}
         >
           {l}

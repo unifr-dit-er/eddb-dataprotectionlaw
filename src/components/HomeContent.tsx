@@ -5,7 +5,9 @@ import DecisionPanel from '@/components/DecisionPanel'
 import FilterSidebar from '@/components/FilterSidebar'
 import LanguageSelector from '@/components/LanguageSelector'
 import { ScrollArea } from '@/components/ui/scroll-area'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { useLanguage } from '@/contexts/LanguageContext'
+import { useFontSize } from '@/contexts/FontSizeContext'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useCallback } from 'react'
 import Image from 'next/image'
@@ -15,6 +17,7 @@ const HomeContent = () => {
   const router = useRouter()
   const pathname = usePathname()
   const { t } = useLanguage()
+  const { fontSize, setFontSize, fontSizes, fontSizeLabels } = useFontSize()
 
   const decisionId = searchParams.get('decision')
 
@@ -28,27 +31,45 @@ const HomeContent = () => {
   return (
     <div className="flex h-screen overflow-hidden">
       <aside className="w-80 shrink-0 bg-sidebar text-sidebar-foreground flex flex-col overflow-hidden border-r border-sidebar-border">
-        <div className="bg-white px-5 py-3 shrink-0">
-          <Image src="/unifr.png" alt="Université de Fribourg" width={340} height={84} className="h-20 w-auto object-contain" />
+        <div className="px-4 pt-3 pb-2 shrink-0">
+          <p className="text-[11px] tracking-[0.25em] uppercase font-semibold text-sidebar-foreground/40">
+            {t('sidebar.subtitle')}
+          </p>
         </div>
-        <div className="h-px bg-sidebar-border/60 mx-0 shrink-0" />
-        <div className="px-6 pt-7 pb-6 shrink-0">
-          <div className="flex items-center justify-between mb-2">
-            <p className="text-[11px] tracking-[0.25em] uppercase font-semibold text-sidebar-foreground/40">
-              {t('sidebar.subtitle')}
-            </p>
-            <LanguageSelector />
-          </div>
-          <h1 className="text-lg font-semibold text-sidebar-foreground leading-[1.3]">
-            {t('sidebar.title')}
-          </h1>
+        <div className="h-px bg-sidebar-border/60 shrink-0" />
+        <div className="bg-white px-4 py-2 shrink-0">
+          <Image src="/unifr.png" alt="Université de Fribourg" width={340} height={84} className="h-10 w-auto object-contain" loading="eager" priority />
         </div>
+        <div className="h-px bg-sidebar-border/60 shrink-0" />
         <ScrollArea className="flex-1 min-h-0">
           <FilterSidebar />
         </ScrollArea>
       </aside>
-      <main className="flex-1 overflow-y-auto bg-background">
-        <DecisionList />
+      <main className="flex-1 flex flex-col overflow-hidden bg-background">
+        <header className="shrink-0 border-b border-border px-8 py-4 flex items-center justify-between gap-6">
+          <h1 className="text-base font-semibold text-foreground leading-snug">
+            {t('header.title')}
+          </h1>
+          <div className="flex items-center gap-3 shrink-0">
+            <Select value={fontSize} onValueChange={(v) => setFontSize(v as typeof fontSize)}>
+              <SelectTrigger className="data-[size=default]:h-auto border-0 shadow-none focus-visible:ring-0 focus-visible:border-0 px-1.5 py-0.5 text-[11px] tracking-[0.15em] uppercase font-semibold bg-muted text-foreground rounded gap-1 [&_svg:not([class*='size-'])]:size-3">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent position="popper" side="bottom" align="end">
+                {fontSizes.map((size) => (
+                  <SelectItem key={size} value={size} className="text-[11px] uppercase font-semibold tracking-[0.1em]">
+                    {fontSizeLabels[size]}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <div className="w-px h-4 bg-border" />
+            <LanguageSelector />
+          </div>
+        </header>
+        <div className="flex-1 overflow-y-auto">
+          <DecisionList />
+        </div>
       </main>
       <DecisionPanel decisionId={decisionId} onClose={closePanel} />
     </div>

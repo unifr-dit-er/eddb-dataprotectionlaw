@@ -5,7 +5,7 @@ export type Locale = 'fr' | 'de'
 export type LangSuffix = 'FR' | 'DE'
 
 export interface Translations {
-  'sidebar.title': string
+  'header.title': string
   'sidebar.subtitle': string
   'sidebar.search.label': string
   'sidebar.search.placeholder': string

@@ -1,7 +1,7 @@
 import type { Translations } from './index'
 
 export const fr: Translations = {
-  'sidebar.title': 'Protection des données',
+  'header.title': 'Base de données relative aux décisions cantonales concernant la protection des données',
   'sidebar.subtitle': 'Jurisprudence · CH',
   'sidebar.search.label': 'Recherche',
   'sidebar.search.placeholder': 'Titre, mot-clé…',

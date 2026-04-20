@@ -33,6 +33,8 @@ export interface Translations {
   'footer.faculty.url': string
   'footer.institute': string
   'footer.institute.url': string
+  'footer.eddb': string
+  'footer.eddb.of': string
 }
 
 export const LOCALE_STORAGE_KEY = 'locale'

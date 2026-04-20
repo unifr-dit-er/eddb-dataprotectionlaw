@@ -41,7 +41,7 @@ const HomeContent = () => {
         </ScrollArea>
       </aside>
       <main className="flex-1 flex flex-col overflow-hidden bg-background">
-        <header className="shrink-0 border-b border-border px-8 py-4 flex items-center justify-between gap-6">
+        <header className="shrink-0 border-b border-border px-6 py-4 flex items-center justify-between gap-6">
           <h1 className="text-base font-semibold text-foreground leading-snug">
             {t('header.title')}
           </h1>
@@ -65,7 +65,7 @@ const HomeContent = () => {
         <div className="flex-1 overflow-y-auto">
           <DecisionList />
         </div>
-        <footer className="shrink-0 border-t border-border px-8 py-2">
+        <footer className="shrink-0 border-t border-border px-6 py-2 flex items-center justify-between gap-6">
           <p className="flex items-center gap-2 text-[11px] tracking-[0.25em] uppercase font-semibold text-muted-foreground/60">
             <span className="inline-block h-2.5 w-2.5 bg-primary shrink-0" />
             <a href={t('footer.faculty.url')} target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">
@@ -75,6 +75,12 @@ const HomeContent = () => {
             <a href={t('footer.institute.url')} target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">
               {t('footer.institute')}
             </a>
+          </p>
+          <p className="text-[11px] tracking-[0.25em] uppercase font-semibold text-muted-foreground/60">
+            {t('footer.eddb')}{' '}
+            <a href="https://www.unifr.ch/it/fr/eddb.html" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">EDDB</a>
+            {' '}{t('footer.eddb.of')}{' '}
+            <a href="https://www.unifr.ch/it/fr/enseignement-et-recherche.html" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">DIT-ER</a>
           </p>
         </footer>
       </main>

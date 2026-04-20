@@ -55,7 +55,7 @@ const DecisionCard = ({ decision, isActive, onClick }: DecisionCardProps) => {
           <span
             onClick={handleCantonClick}
             className={cn(
-              'text-[11px] font-bold tracking-[0.15em] uppercase px-1.5 py-0.5 rounded transition-colors cursor-pointer',
+              'text-[0.6875rem] font-bold tracking-[0.15em] uppercase px-1.5 py-0.5 rounded transition-colors cursor-pointer',
               filters.canton === decision.canton
                 ? 'bg-primary/15 text-primary hover:bg-primary/25'
                 : 'text-muted-foreground bg-muted hover:bg-primary/15 hover:text-primary'
@@ -64,7 +64,7 @@ const DecisionCard = ({ decision, isActive, onClick }: DecisionCardProps) => {
             {decision.canton}
           </span>
         )}
-        <span className="text-[13px] text-primary font-medium">{formattedDate}</span>
+        <span className="text-[0.8125rem] text-primary font-medium">{formattedDate}</span>
       </div>
       {decision.keywords.length > 0 && (
         <div className="flex flex-wrap gap-1">
@@ -74,7 +74,7 @@ const DecisionCard = ({ decision, isActive, onClick }: DecisionCardProps) => {
               variant="secondary"
               onClick={(e) => handleKeywordClick(e, kw.id)}
               className={cn(
-                'text-[12px] px-1.5 py-0 font-normal cursor-pointer transition-colors',
+                'text-xs px-1.5 py-0 font-normal cursor-pointer transition-colors',
                 filters.keywords.includes(kw.id)
                   ? 'bg-primary/15 text-primary hover:bg-primary/25'
                   : 'hover:bg-primary/15 hover:text-primary'

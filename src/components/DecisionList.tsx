@@ -124,21 +124,21 @@ const DecisionList = () => {
 
       {pageInfo && pageInfo.totalRows > pageInfo.pageSize && (
         <div className="flex items-center justify-between">
-          <span className="text-[13px] text-muted-foreground">
+          <span className="text-[0.8125rem] text-muted-foreground">
             {t('decisions.page')} {filters.page} / {Math.ceil(pageInfo.totalRows / pageInfo.pageSize)}
           </span>
           <div className="flex gap-5">
             <button
               disabled={pageInfo.isFirstPage}
               onClick={() => setFilter('page', filters.page - 1)}
-              className="text-[13px] text-muted-foreground hover:text-foreground disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+              className="text-[0.8125rem] text-muted-foreground hover:text-foreground disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
             >
               {t('decisions.prev')}
             </button>
             <button
               disabled={pageInfo.isLastPage}
               onClick={() => setFilter('page', filters.page + 1)}
-              className="text-[13px] text-muted-foreground hover:text-foreground disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+              className="text-[0.8125rem] text-muted-foreground hover:text-foreground disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
             >
               {t('decisions.next')}
             </button>

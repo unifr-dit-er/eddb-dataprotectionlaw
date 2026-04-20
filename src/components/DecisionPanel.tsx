@@ -92,7 +92,7 @@ const DecisionPanel = ({ decisionId, onClose }: DecisionPanelProps) => {
                 <span
                   onClick={handleCantonClick}
                   className={cn(
-                    'text-[11px] font-bold tracking-[0.15em] uppercase px-1.5 py-0.5 rounded transition-colors cursor-pointer',
+                    'text-[0.6875rem] font-bold tracking-[0.15em] uppercase px-1.5 py-0.5 rounded transition-colors cursor-pointer',
                     filters.canton === decision.canton
                       ? 'bg-primary/15 text-primary hover:bg-primary/25'
                       : 'bg-muted text-muted-foreground hover:bg-primary/15 hover:text-primary'
@@ -101,7 +101,7 @@ const DecisionPanel = ({ decisionId, onClose }: DecisionPanelProps) => {
                   {getCantonLabel(decision.canton)}
                 </span>
               )}
-              <span className="text-[13px] text-primary font-medium">{formattedDate}</span>
+              <span className="text-[0.8125rem] text-primary font-medium">{formattedDate}</span>
             </div>
 
             <Card className="gap-0 py-0">
@@ -114,7 +114,7 @@ const DecisionPanel = ({ decisionId, onClose }: DecisionPanelProps) => {
               <div className="space-y-4">
                 {Object.keys(groupedKeywords).map((category) => (
                   <div key={category}>
-                    <p className="text-[11px] tracking-[0.2em] uppercase font-semibold text-muted-foreground mb-2">
+                    <p className="text-[0.6875rem] tracking-[0.2em] uppercase font-semibold text-muted-foreground mb-2">
                       {category}
                     </p>
                     <div className="flex flex-wrap gap-1.5">
@@ -127,7 +127,7 @@ const DecisionPanel = ({ decisionId, onClose }: DecisionPanelProps) => {
                           variant="secondary"
                           onClick={() => handleKeywordClick(kw.id)}
                           className={cn(
-                            'text-[12px] px-2 py-0.5 font-normal cursor-pointer transition-colors',
+                            'text-xs px-2 py-0.5 font-normal cursor-pointer transition-colors',
                             filters.keywords.includes(kw.id)
                               ? 'bg-primary/15 text-primary hover:bg-primary/25'
                               : 'hover:bg-primary/15 hover:text-primary'

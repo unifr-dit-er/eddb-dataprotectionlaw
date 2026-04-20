@@ -134,6 +134,37 @@ const FilterSidebar = () => {
         </Select>
       </div>
 
+      <Divider />
+
+      {/* Period */}
+      <div>
+        <SectionLabel>{t('sidebar.period.label')}</SectionLabel>
+        <div className="space-y-2">
+          <div>
+            <p className="text-[11px] text-sidebar-foreground/40 mb-1 tracking-widest uppercase">
+              {t('sidebar.period.from')}
+            </p>
+            <Input
+              type="date"
+              value={filters.from}
+              onChange={(e) => setFilter('from', e.target.value)}
+              className="bg-sidebar-accent border-sidebar-border text-sidebar-foreground focus-visible:border-primary focus-visible:ring-primary/30 h-9 text-base"
+            />
+          </div>
+          <div>
+            <p className="text-[11px] text-sidebar-foreground/40 mb-1 tracking-widest uppercase">
+              {t('sidebar.period.to')}
+            </p>
+            <Input
+              type="date"
+              value={filters.to}
+              onChange={(e) => setFilter('to', e.target.value)}
+              className="bg-sidebar-accent border-sidebar-border text-sidebar-foreground focus-visible:border-primary focus-visible:ring-primary/30 h-9 text-base"
+            />
+          </div>
+        </div>
+      </div>
+
       {/* Keywords grouped by category */}
       {sortedCategories.length > 0 && (
         <>
@@ -214,37 +245,6 @@ const FilterSidebar = () => {
           </div>
         </>
       )}
-
-      <Divider />
-
-      {/* Period */}
-      <div>
-        <SectionLabel>{t('sidebar.period.label')}</SectionLabel>
-        <div className="space-y-2">
-          <div>
-            <p className="text-[11px] text-sidebar-foreground/40 mb-1 tracking-widest uppercase">
-              {t('sidebar.period.from')}
-            </p>
-            <Input
-              type="date"
-              value={filters.from}
-              onChange={(e) => setFilter('from', e.target.value)}
-              className="bg-sidebar-accent border-sidebar-border text-sidebar-foreground focus-visible:border-primary focus-visible:ring-primary/30 h-9 text-base"
-            />
-          </div>
-          <div>
-            <p className="text-[11px] text-sidebar-foreground/40 mb-1 tracking-widest uppercase">
-              {t('sidebar.period.to')}
-            </p>
-            <Input
-              type="date"
-              value={filters.to}
-              onChange={(e) => setFilter('to', e.target.value)}
-              className="bg-sidebar-accent border-sidebar-border text-sidebar-foreground focus-visible:border-primary focus-visible:ring-primary/30 h-9 text-base"
-            />
-          </div>
-        </div>
-      </div>
 
 
     </div>

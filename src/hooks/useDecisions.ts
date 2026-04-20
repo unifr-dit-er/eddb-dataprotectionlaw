@@ -24,8 +24,8 @@ const buildQueryString = (
 
   if (filters.q) conditions.push(`(Description${langSuffix},like,%${filters.q}%)`)
   if (filters.canton) conditions.push(`(Canton,eq,${filters.canton})`)
-  if (filters.from) conditions.push(`(Date,gte,${filters.from})`)
-  if (filters.to) conditions.push(`(Date,lte,${filters.to})`)
+  if (filters.from) conditions.push(`(Date,ge,exactDate,${filters.from})`)
+  if (filters.to) conditions.push(`(Date,le,exactDate,${filters.to})`)
   if (decisionIds) conditions.push(`(Id,in,${decisionIds.join(',')})`)
 
   if (conditions.length > 0) params.set('where', conditions.join('~and'))

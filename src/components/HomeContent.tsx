@@ -8,6 +8,7 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useCallback } from 'react'
+import Image from 'next/image'
 
 const HomeContent = () => {
   const searchParams = useSearchParams()
@@ -27,6 +28,10 @@ const HomeContent = () => {
   return (
     <div className="flex h-screen overflow-hidden">
       <aside className="w-80 shrink-0 bg-sidebar text-sidebar-foreground flex flex-col overflow-hidden border-r border-sidebar-border">
+        <div className="bg-white px-5 py-3 shrink-0">
+          <Image src="/unifr.png" alt="Université de Fribourg" width={340} height={84} className="h-20 w-auto object-contain" />
+        </div>
+        <div className="h-px bg-sidebar-border/60 mx-0 shrink-0" />
         <div className="px-6 pt-7 pb-6 shrink-0">
           <div className="flex items-center justify-between mb-2">
             <p className="text-[11px] tracking-[0.25em] uppercase font-semibold text-sidebar-foreground/40">
@@ -38,7 +43,6 @@ const HomeContent = () => {
             {t('sidebar.title')}
           </h1>
         </div>
-        <div className="h-px bg-sidebar-border/60 mx-4 shrink-0" />
         <ScrollArea className="flex-1 min-h-0">
           <FilterSidebar />
         </ScrollArea>

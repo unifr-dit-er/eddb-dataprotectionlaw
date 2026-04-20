@@ -24,8 +24,8 @@ const atkinsonMono = Atkinson_Hyperlegible_Mono({
 // by the client-side LanguageContext. They reflect the default locale (FR).
 // Canton labels in src/lib/cantons.ts are also French-only (follow-up task).
 export const metadata: Metadata = {
-  title: 'Décisions — Protection des données',
-  description: 'Décisions juridiques suisses sur la protection des données',
+  title: 'Base de données — Protection des données',
+  description: 'Décisions juridiques cantonales suisses concernant la protection des données',
 }
 
 export default function RootLayout({

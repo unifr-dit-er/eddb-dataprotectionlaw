@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { useLanguage } from '@/contexts/LanguageContext'
 import { useFontSize } from '@/contexts/FontSizeContext'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-import { useCallback } from 'react'
+import { useCallback, useEffect } from 'react'
 import Image from 'next/image'
 import { ChevronRight } from 'lucide-react'
 
@@ -17,8 +17,14 @@ const HomeContent = () => {
   const searchParams = useSearchParams()
   const router = useRouter()
   const pathname = usePathname()
-  const { t } = useLanguage()
+  const { t, locale } = useLanguage()
   const { fontSize, setFontSize, fontSizes, fontSizeLabels } = useFontSize()
+
+  useEffect(() => {
+    document.title = locale === 'de'
+      ? 'Urteils-Datenbank Datenschutz'
+      : 'Base de données — Protection des données'
+  }, [locale])
 
   const decisionId = searchParams.get('decision')
 

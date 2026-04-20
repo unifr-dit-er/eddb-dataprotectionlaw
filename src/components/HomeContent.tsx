@@ -32,7 +32,7 @@ const HomeContent = () => {
   return (
     <div className="flex h-screen overflow-hidden">
       <aside className="w-80 shrink-0 bg-sidebar text-sidebar-foreground flex flex-col overflow-hidden border-r border-sidebar-border">
-        <div className="bg-white px-4 py-2 shrink-0">
+        <div className="bg-white px-4 py-4 shrink-0">
           <Image src="/unifr.png" alt="Université de Fribourg" width={340} height={84} className="h-10 w-auto object-contain" loading="eager" priority />
         </div>
         <div className="h-px bg-sidebar-border/60 shrink-0" />

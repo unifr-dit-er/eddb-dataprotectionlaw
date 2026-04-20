@@ -11,6 +11,7 @@ import { useFontSize } from '@/contexts/FontSizeContext'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useCallback } from 'react'
 import Image from 'next/image'
+import { ChevronRight } from 'lucide-react'
 
 const HomeContent = () => {
   const searchParams = useSearchParams()
@@ -31,12 +32,6 @@ const HomeContent = () => {
   return (
     <div className="flex h-screen overflow-hidden">
       <aside className="w-80 shrink-0 bg-sidebar text-sidebar-foreground flex flex-col overflow-hidden border-r border-sidebar-border">
-        <div className="px-4 pt-3 pb-2 shrink-0">
-          <p className="text-[11px] tracking-[0.25em] uppercase font-semibold text-sidebar-foreground/40">
-            {t('sidebar.subtitle')}
-          </p>
-        </div>
-        <div className="h-px bg-sidebar-border/60 shrink-0" />
         <div className="bg-white px-4 py-2 shrink-0">
           <Image src="/unifr.png" alt="Université de Fribourg" width={340} height={84} className="h-10 w-auto object-contain" loading="eager" priority />
         </div>
@@ -70,6 +65,18 @@ const HomeContent = () => {
         <div className="flex-1 overflow-y-auto">
           <DecisionList />
         </div>
+        <footer className="shrink-0 border-t border-border px-8 py-2">
+          <p className="flex items-center gap-2 text-[11px] tracking-[0.25em] uppercase font-semibold text-muted-foreground/60">
+            <span className="inline-block h-2.5 w-2.5 bg-primary shrink-0" />
+            <a href={t('footer.faculty.url')} target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">
+              {t('footer.faculty')}
+            </a>
+            <ChevronRight className="inline h-3 w-3 mx-1 opacity-50" />
+            <a href={t('footer.institute.url')} target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">
+              {t('footer.institute')}
+            </a>
+          </p>
+        </footer>
       </main>
       <DecisionPanel decisionId={decisionId} onClose={closePanel} />
     </div>

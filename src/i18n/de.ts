@@ -25,4 +25,8 @@ export const de: Translations = {
   'decisions.page': 'Seite',
   'decisions.prev': '← Zurück',
   'decisions.next': 'Weiter →',
+  'footer.faculty': 'Rechtswissenschaftliche Fakultät',
+  'footer.faculty.url': 'https://www.unifr.ch/ius',
+  'footer.institute': 'Institut für Europarecht',
+  'footer.institute.url': 'https://www.unifr.ch/ius/euroinstitut',
 }

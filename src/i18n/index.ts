@@ -29,6 +29,10 @@ export interface Translations {
   'decisions.page': string
   'decisions.prev': string
   'decisions.next': string
+  'footer.faculty': string
+  'footer.faculty.url': string
+  'footer.institute': string
+  'footer.institute.url': string
 }
 
 export const LOCALE_STORAGE_KEY = 'locale'

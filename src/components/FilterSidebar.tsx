@@ -18,7 +18,7 @@ import { useLanguage } from '@/contexts/LanguageContext'
 import { useFilters } from '@/hooks/useFilters'
 import DatePickerFilter from '@/components/DatePickerFilter'
 import { useKeywords } from '@/hooks/useKeywords'
-import { CANTONS } from '@/lib/cantons'
+import { CANTONS, getCantonLabel } from '@/lib/cantons'
 import { cn } from '@/lib/utils'
 import type { Keyword } from '@/types/keyword'
 import { ChevronRight } from 'lucide-react'
@@ -35,7 +35,7 @@ const Divider = () => <div className="h-px bg-sidebar-border/50 my-1" />
 const FilterSidebar = () => {
   const { filters, setFilter, resetFilters } = useFilters()
   const { data: keywords = [] } = useKeywords()
-  const { t } = useLanguage()
+  const { t, langSuffix } = useLanguage()
   const [qInput, setQInput] = useState(filters.q)
   const [openCategories, setOpenCategories] = useState<Set<string>>(new Set())
 
@@ -128,7 +128,7 @@ const FilterSidebar = () => {
             <SelectItem value="_all">{t('sidebar.canton.all')}</SelectItem>
             {CANTONS.map((c) => (
               <SelectItem key={c.code} value={c.code}>
-                {c.label}
+                {getCantonLabel(c.code, langSuffix)}
               </SelectItem>
             ))}
           </SelectContent>

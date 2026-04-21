@@ -23,7 +23,7 @@ interface DecisionPanelProps {
 
 const DecisionPanel = ({ decisionId, onClose }: DecisionPanelProps) => {
   const { data: decision, isLoading } = useDecision(decisionId)
-  const { t, locale } = useLanguage()
+  const { t, locale, langSuffix } = useLanguage()
   const { filters, setFilter } = useFilters()
 
   const handleCopyLink = () => {
@@ -98,7 +98,7 @@ const DecisionPanel = ({ decisionId, onClose }: DecisionPanelProps) => {
                       : 'bg-muted text-muted-foreground hover:bg-primary/15 hover:text-primary'
                   )}
                 >
-                  {getCantonLabel(decision.canton)}
+                  {getCantonLabel(decision.canton, langSuffix)}
                 </span>
               )}
               <span className="text-[0.8125rem] text-primary font-medium">{formattedDate}</span>

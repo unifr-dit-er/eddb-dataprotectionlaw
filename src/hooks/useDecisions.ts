@@ -7,6 +7,7 @@ import { useRef } from 'react'
 import { NOCODB_TABLES } from '@/lib/nocodb-tables'
 import { mapDecision } from '@/lib/nocodb-mappers'
 import { useLanguage } from '@/contexts/LanguageContext'
+import { apiFetch } from '@/lib/api-fetch'
 export const DECISIONS_QUERY_KEY = (filters: Filters, langSuffix: LangSuffix) =>
   ['decisions', filters, langSuffix] as const
 
@@ -42,7 +43,7 @@ const fetchDecisionIdsForKeywords = async (
   const where = `(Keywords_id,in,${keywordIds.join(',')})`
   const params = new URLSearchParams({ where, limit: '1000', fields: 'Decisions_id' })
   const devQuery = `/api/v2/tables/${NOCODB_TABLES.DECISIONS_KEYWORDS}/records?${params}`
-  const response = await fetch(`/api/nocodb${devQuery}`)
+  const response = await apiFetch(`/api/nocodb${devQuery}`)
   if (!response.ok) throw new Error('Failed to fetch keyword-decision links')
   const data = await response.json()
   const ids = (data.list ?? []).map((r: Record<string, unknown>) => String(r.Decisions_id))
@@ -81,7 +82,7 @@ const fetchDecisions = async (
   const qs = buildQueryString(filters, langSuffix, decisionIds)
   pushQuery(`/api/v2/tables/${NOCODB_TABLES.DECISIONS}/records?${qs}`)
 
-  const response = await fetch(
+  const response = await apiFetch(
     `/api/nocodb/api/v2/tables/${NOCODB_TABLES.DECISIONS}/records?${qs}`
   )
   if (!response.ok) {

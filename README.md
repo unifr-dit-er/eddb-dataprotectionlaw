@@ -39,7 +39,7 @@ NOCODB_API_TOKEN=your_token_here
 npm run dev
 ```
 
-L'application est accessible sur [http://localhost:3000](http://localhost:3000).
+L'application est accessible sur [http://localhost:3000/dataprotectionlaw](http://localhost:3000/dataprotectionlaw).
 
 ## Production
 

@@ -3,6 +3,7 @@ import type { LangSuffix } from '@/i18n'
 import { useQuery } from '@tanstack/react-query'
 import { NOCODB_TABLES } from '@/lib/nocodb-tables'
 import { mapKeyword } from '@/lib/nocodb-mappers'
+import { apiFetch } from '@/lib/api-fetch'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 export const KEYWORDS_QUERY_KEY = (langSuffix: LangSuffix) =>
@@ -12,8 +13,8 @@ type NocoDBRecord = Record<string, unknown>
 
 const fetchKeywords = async (langSuffix: LangSuffix): Promise<Keyword[]> => {
   const [kwResp, catResp] = await Promise.all([
-    fetch(`/api/nocodb/api/v2/tables/${NOCODB_TABLES.KEYWORDS}/records?limit=1000`),
-    fetch(`/api/nocodb/api/v2/tables/${NOCODB_TABLES.CATEGORIES}/records?limit=200`),
+    apiFetch(`/api/nocodb/api/v2/tables/${NOCODB_TABLES.KEYWORDS}/records?limit=1000`),
+    apiFetch(`/api/nocodb/api/v2/tables/${NOCODB_TABLES.CATEGORIES}/records?limit=200`),
   ])
   if (!kwResp.ok) throw new Error('Failed to fetch keywords')
   if (!catResp.ok) throw new Error('Failed to fetch categories')

@@ -3,7 +3,7 @@ import type { Keyword } from '@/types/keyword'
 import type { LangSuffix } from '@/i18n'
 
 type NocoDBRecord = Record<string, unknown>
-type NocoDBAttachment = { url?: string; path?: string }
+type NocoDBAttachment = { url?: string; signedPath?: string }
 
 export const mapDecision = (record: NocoDBRecord, langSuffix: LangSuffix): Decision => {
   const attachments = Array.isArray(record.Attachment)
@@ -25,7 +25,9 @@ export const mapDecision = (record: NocoDBRecord, langSuffix: LangSuffix): Decis
     keywords: m2mEntries
       .filter((entry) => entry.Keywords != null)
       .map((entry) => mapKeyword(entry.Keywords as NocoDBRecord, langSuffix)),
-    pdfUrl: attachments[0]?.url ?? attachments[0]?.path ?? '',
+    pdfUrl: attachments[0]?.url ?? (attachments[0]?.signedPath
+      ? `${process.env.NEXT_PUBLIC_NOCODB_API_URL?.replace(/\/$/, '') ?? ''}/${attachments[0].signedPath}`
+      : ''),
   }
 }
 

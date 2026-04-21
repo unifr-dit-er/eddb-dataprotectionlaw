@@ -12,13 +12,19 @@ git clone <url-du-repo>
 cd eddb-dataprotectionlaw
 ```
 
-## 2. Configurer le token NocoDB
+## 2. Créer le fichier Quadlet
 
-Dans le fichier `eddb-dataprotectionlaw.container`, remplacer la valeur de `NOCODB_API_TOKEN` :
+Copier le template et l'adapter :
 
-```ini
-Environment=NOCODB_API_TOKEN=your_token_here
+```bash
+cp eddb-dataprotectionlaw.container.example eddb-dataprotectionlaw.container
 ```
+
+Puis éditer `eddb-dataprotectionlaw.container` :
+- Remplacer `your_token_here` par le vrai token NocoDB
+- Ajuster `PublishPort` si nécessaire (port externe:3000)
+
+> Ce fichier contient des secrets — il est ignoré par git et ne doit jamais être commité.
 
 ## 3. Déployer le fichier Quadlet
 

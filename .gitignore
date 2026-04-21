@@ -34,6 +34,9 @@ yarn-error.log*
 .env.local
 .env*.local
 
+# Quadlet container file — contains secrets and VM-specific config, use .container.example as template
+eddb-dataprotectionlaw.container
+
 # vercel
 .vercel
 
